@@ -18,15 +18,15 @@ struct SwiftHeroes : Conference {
 func organise(_ conference: some Conference)
 
 // swiftHeroes
-sil_global hidden [let] @$s4main11swiftHeroesAA05SwiftC0Vvp : $SwiftHeroes
+sil_global hidden [let] @main.swiftHeroes : main.SwiftHeroes : $SwiftHeroes
 
 // main
 sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
 [%1: noescape **]
 [global: read,write,copy]
 bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
-  alloc_global @$s4main11swiftHeroesAA05SwiftC0Vvp // id: %2
-  %3 = global_addr @$s4main11swiftHeroesAA05SwiftC0Vvp : $*SwiftHeroes // user: %5
+  alloc_global @main.swiftHeroes : main.SwiftHeroes // id: %2
+  %3 = global_addr @main.swiftHeroes : main.SwiftHeroes : $*SwiftHeroes // user: %5
   %4 = struct $SwiftHeroes ()                     // user: %5
   store %4 to %3 : $*SwiftHeroes                  // id: %5
   %6 = integer_literal $Builtin.Int32, 0          // user: %7
@@ -35,34 +35,34 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
 } // end sil function 'main'
 
 // SwiftHeroes.organise()
-sil hidden @$s4main11SwiftHeroesV8organiseyyF : $@convention(method) (SwiftHeroes) -> () {
+sil hidden @main.SwiftHeroes.organise() -> () : $@convention(method) (SwiftHeroes) -> () {
 [global: ]
 // %0 "self"                                      // user: %1
 bb0(%0 : $SwiftHeroes):
   debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
   %2 = tuple ()                                   // user: %3
   return %2 : $()                                 // id: %3
-} // end sil function '$s4main11SwiftHeroesV8organiseyyF'
+} // end sil function 'main.SwiftHeroes.organise() -> ()'
 
 // SwiftHeroes.init()
-sil hidden @$s4main11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
+sil hidden @main.SwiftHeroes.init() -> main.SwiftHeroes : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
 [global: ]
 // %0 "$metatype"
 bb0(%0 : $@thin SwiftHeroes.Type):
   %1 = struct $SwiftHeroes ()                     // user: %2
   return %1 : $SwiftHeroes                        // id: %2
-} // end sil function '$s4main11SwiftHeroesVACycfC'
+} // end sil function 'main.SwiftHeroes.init() -> main.SwiftHeroes'
 
 // protocol witness for Conference.organise() in conformance SwiftHeroes
-sil private [transparent] [thunk] @$s4main11SwiftHeroesVAA10ConferenceA2aDP8organiseyyFTW : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> () {
+sil private [transparent] [thunk] @protocol witness for main.Conference.organise() -> () in conformance main.SwiftHeroes : main.Conference in main : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> () {
 [global: ]
 bb0(%0 : $*SwiftHeroes):
   %1 = tuple ()                                   // user: %2
   return %1 : $()                                 // id: %2
-} // end sil function '$s4main11SwiftHeroesVAA10ConferenceA2aDP8organiseyyFTW'
+} // end sil function 'protocol witness for main.Conference.organise() -> () in conformance main.SwiftHeroes : main.Conference in main'
 
 // organise<A>(_:)
-sil hidden @$s4main8organiseyyxAA10ConferenceRzlF : $@convention(thin) <<anonymous> where <anonymous> : Conference> (@in_guaranteed <anonymous>) -> () {
+sil hidden @main.organise<A where A: main.Conference>(A) -> () : $@convention(thin) <<anonymous> where <anonymous> : Conference> (@in_guaranteed <anonymous>) -> () {
 [%0: read v**, write v**, copy v**, destroy v**]
 [global: read,write,copy,destroy,allocate,deinit_barrier]
 // %0 "conference"                                // users: %3, %1
@@ -72,10 +72,10 @@ bb0(%0 : $*some Conference):
   %3 = apply %2<some Conference>(%0) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> ()
   %4 = tuple ()                                   // user: %5
   return %4 : $()                                 // id: %5
-} // end sil function '$s4main8organiseyyxAA10ConferenceRzlF'
+} // end sil function 'main.organise<A where A: main.Conference>(A) -> ()'
 
 sil_witness_table hidden SwiftHeroes: Conference module main {
-  method #Conference.organise: <Self where Self : Conference> (Self) -> () -> () : @$s4main11SwiftHeroesVAA10ConferenceA2aDP8organiseyyFTW	// protocol witness for Conference.organise() in conformance SwiftHeroes
+  method #Conference.organise: <Self where Self : Conference> (Self) -> () -> () : @protocol witness for main.Conference.organise() -> () in conformance main.SwiftHeroes : main.Conference in main	// protocol witness for Conference.organise() in conformance SwiftHeroes
 }
 
 

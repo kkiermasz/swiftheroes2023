@@ -14,29 +14,29 @@ sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutableP
 bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
   %2 = integer_literal $Builtin.Word, 1           // user: %4
   // function_ref _allocateUninitializedArray<A>(_:)
-  %3 = function_ref @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
+  %3 = function_ref @Swift._allocateUninitializedArray<A>(Builtin.Word) -> ([A], Builtin.RawPointer) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
   %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %6, %5
   %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // user: %15
   %6 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %7
   %7 = pointer_to_address %6 : $Builtin.RawPointer to [strict] $*Any // user: %12
   %8 = metatype $@thin SwiftHeroes.Type           // user: %10
   // function_ref SwiftHeroes.init()
-  %9 = function_ref @$s6struct11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes // user: %10
+  %9 = function_ref @struct.SwiftHeroes.init() -> struct.SwiftHeroes : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes // user: %10
   %10 = apply %9(%8) : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes // user: %11
   %11 = struct_extract %10 : $SwiftHeroes, #SwiftHeroes.numberOfAttendees // user: %13
   %12 = init_existential_addr %7 : $*Any, $Int    // user: %13
   store %11 to %12 : $*Int                        // id: %13
   // function_ref _finalizeUninitializedArray<A>(_:)
-  %14 = function_ref @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // user: %15
+  %14 = function_ref @Swift._finalizeUninitializedArray<A>(__owned [A]) -> [A] : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // user: %15
   %15 = apply %14<Any>(%5) : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // users: %24, %21
   // function_ref default argument 1 of print(_:separator:terminator:)
-  %16 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %17
+  %16 = function_ref @default argument 1 of Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> () : $@convention(thin) () -> @owned String // user: %17
   %17 = apply %16() : $@convention(thin) () -> @owned String // users: %23, %21
   // function_ref default argument 2 of print(_:separator:terminator:)
-  %18 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %19
+  %18 = function_ref @default argument 2 of Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> () : $@convention(thin) () -> @owned String // user: %19
   %19 = apply %18() : $@convention(thin) () -> @owned String // users: %22, %21
   // function_ref print(_:separator:terminator:)
-  %20 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %21
+  %20 = function_ref @Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> () : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %21
   %21 = apply %20(%15, %17, %19) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
   release_value %19 : $String                     // id: %22
   release_value %17 : $String                     // id: %23
@@ -47,34 +47,34 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
 } // end sil function 'main'
 
 // variable initialization expression of SwiftHeroes.numberOfAttendees
-sil hidden [transparent] @$s6struct11SwiftHeroesV17numberOfAttendeesSivpfi : $@convention(thin) () -> Int {
+sil hidden [transparent] @variable initialization expression of struct.SwiftHeroes.numberOfAttendees : Swift.Int : $@convention(thin) () -> Int {
 bb0:
   %0 = integer_literal $Builtin.Int64, 0          // user: %1
   %1 = struct $Int (%0 : $Builtin.Int64)          // user: %2
   return %1 : $Int                                // id: %2
-} // end sil function '$s6struct11SwiftHeroesV17numberOfAttendeesSivpfi'
+} // end sil function 'variable initialization expression of struct.SwiftHeroes.numberOfAttendees : Swift.Int'
 
 // Int.init(_builtinIntegerLiteral:)
-sil public_external [transparent] @$sSi22_builtinIntegerLiteralSiBI_tcfC : $@convention(method) (Builtin.IntLiteral, @thin Int.Type) -> Int {
+sil public_external [transparent] @Swift.Int.init(_builtinIntegerLiteral: Builtin.IntLiteral) -> Swift.Int : $@convention(method) (Builtin.IntLiteral, @thin Int.Type) -> Int {
 // %0                                             // user: %2
 bb0(%0 : $Builtin.IntLiteral, %1 : $@thin Int.Type):
   %2 = builtin "s_to_s_checked_trunc_IntLiteral_Int64"(%0 : $Builtin.IntLiteral) : $(Builtin.Int64, Builtin.Int1) // user: %3
   %3 = tuple_extract %2 : $(Builtin.Int64, Builtin.Int1), 0 // user: %4
   %4 = struct $Int (%3 : $Builtin.Int64)          // user: %5
   return %4 : $Int                                // id: %5
-} // end sil function '$sSi22_builtinIntegerLiteralSiBI_tcfC'
+} // end sil function 'Swift.Int.init(_builtinIntegerLiteral: Builtin.IntLiteral) -> Swift.Int'
 
 // SwiftHeroes.numberOfAttendees.getter
-sil hidden [transparent] @$s6struct11SwiftHeroesV17numberOfAttendeesSivg : $@convention(method) (SwiftHeroes) -> Int {
+sil hidden [transparent] @struct.SwiftHeroes.numberOfAttendees.getter : Swift.Int : $@convention(method) (SwiftHeroes) -> Int {
 // %0 "self"                                      // users: %2, %1
 bb0(%0 : $SwiftHeroes):
   debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
   %2 = struct_extract %0 : $SwiftHeroes, #SwiftHeroes.numberOfAttendees // user: %3
   return %2 : $Int                                // id: %3
-} // end sil function '$s6struct11SwiftHeroesV17numberOfAttendeesSivg'
+} // end sil function 'struct.SwiftHeroes.numberOfAttendees.getter : Swift.Int'
 
 // SwiftHeroes.init()
-sil hidden @$s6struct11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
+sil hidden @struct.SwiftHeroes.init() -> struct.SwiftHeroes : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
 // %0 "$metatype"
 bb0(%0 : $@thin SwiftHeroes.Type):
   %1 = alloc_stack $SwiftHeroes, var, name "self", implicit // users: %5, %6
@@ -84,57 +84,57 @@ bb0(%0 : $@thin SwiftHeroes.Type):
   store %4 to %1 : $*SwiftHeroes                  // id: %5
   dealloc_stack %1 : $*SwiftHeroes                // id: %6
   return %4 : $SwiftHeroes                        // id: %7
-} // end sil function '$s6struct11SwiftHeroesVACycfC'
+} // end sil function 'struct.SwiftHeroes.init() -> struct.SwiftHeroes'
 
 // _allocateUninitializedArray<A>(_:)
-sil [always_inline] [_semantics "array.uninitialized_intrinsic"] @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer)
+sil [always_inline] [_semantics "array.uninitialized_intrinsic"] @Swift._allocateUninitializedArray<A>(Builtin.Word) -> ([A], Builtin.RawPointer) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer)
 
 // _finalizeUninitializedArray<A>(_:)
-sil shared [readnone] [_semantics "array.finalize_intrinsic"] @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <Element> (@owned Array<Element>) -> @owned Array<Element> {
+sil shared [readnone] [_semantics "array.finalize_intrinsic"] @Swift._finalizeUninitializedArray<A>(__owned [A]) -> [A] : $@convention(thin) <Element> (@owned Array<Element>) -> @owned Array<Element> {
 [%0: escape! v** => %r.v**, escape! v**.c*.v** => %r.v**.c*.v**]
 // %0                                             // user: %2
 bb0(%0 : $Array<Element>):
   %1 = alloc_stack $Array<Element>                // users: %6, %5, %4, %2
   store %0 to %1 : $*Array<Element>               // id: %2
   // function_ref Array._endMutation()
-  %3 = function_ref @$sSa12_endMutationyyF : $@convention(method) <τ_0_0> (@inout Array<τ_0_0>) -> () // user: %4
+  %3 = function_ref @Swift.Array._endMutation() -> () : $@convention(method) <τ_0_0> (@inout Array<τ_0_0>) -> () // user: %4
   %4 = apply %3<Element>(%1) : $@convention(method) <τ_0_0> (@inout Array<τ_0_0>) -> ()
   %5 = load %1 : $*Array<Element>                 // user: %7
   dealloc_stack %1 : $*Array<Element>             // id: %6
   return %5 : $Array<Element>                     // id: %7
-} // end sil function '$ss27_finalizeUninitializedArrayySayxGABnlF'
+} // end sil function 'Swift._finalizeUninitializedArray<A>(__owned [A]) -> [A]'
 
 // default argument 1 of print(_:separator:terminator:)
-sil shared @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String {
+sil shared @default argument 1 of Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> () : $@convention(thin) () -> @owned String {
 bb0:
   %0 = string_literal utf8 " "                    // user: %5
   %1 = integer_literal $Builtin.Word, 1           // user: %5
   %2 = integer_literal $Builtin.Int1, -1          // user: %5
   %3 = metatype $@thin String.Type                // user: %5
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %4 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %5
+  %4 = function_ref @Swift.String.init(_builtinStringLiteral: Builtin.RawPointer, utf8CodeUnitCount: Builtin.Word, isASCII: Builtin.Int1) -> Swift.String : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %5
   %5 = apply %4(%0, %1, %2, %3) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %6
   return %5 : $String                             // id: %6
-} // end sil function '$ss5print_9separator10terminatoryypd_S2StFfA0_'
+} // end sil function 'default argument 1 of Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> ()'
 
 // default argument 2 of print(_:separator:terminator:)
-sil shared @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String {
+sil shared @default argument 2 of Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> () : $@convention(thin) () -> @owned String {
 bb0:
   %0 = string_literal utf8 "\n"                   // user: %5
   %1 = integer_literal $Builtin.Word, 1           // user: %5
   %2 = integer_literal $Builtin.Int1, -1          // user: %5
   %3 = metatype $@thin String.Type                // user: %5
   // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-  %4 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %5
+  %4 = function_ref @Swift.String.init(_builtinStringLiteral: Builtin.RawPointer, utf8CodeUnitCount: Builtin.Word, isASCII: Builtin.Int1) -> Swift.String : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %5
   %5 = apply %4(%0, %1, %2, %3) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %6
   return %5 : $String                             // id: %6
-} // end sil function '$ss5print_9separator10terminatoryypd_S2StFfA1_'
+} // end sil function 'default argument 2 of Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> ()'
 
 // print(_:separator:terminator:)
-sil @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+sil @Swift.print(_: Any..., separator: Swift.String, terminator: Swift.String) -> () : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
 
 // Array._endMutation()
-sil shared [_semantics "array.end_mutation"] @$sSa12_endMutationyyF : $@convention(method) <Element> (@inout Array<Element>) -> () {
+sil shared [_semantics "array.end_mutation"] @Swift.Array._endMutation() -> () : $@convention(method) <Element> (@inout Array<Element>) -> () {
 [%0: noescape! **]
 // %0                                             // users: %9, %1
 bb0(%0 : $*Array<Element>):
@@ -149,10 +149,10 @@ bb0(%0 : $*Array<Element>):
   store %8 to %0 : $*Array<Element>               // id: %9
   %10 = tuple ()                                  // user: %11
   return %10 : $()                                // id: %11
-} // end sil function '$sSa12_endMutationyyF'
+} // end sil function 'Swift.Array._endMutation() -> ()'
 
 // String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
-sil [always_inline] [readonly] [_semantics "string.makeUTF8"] @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String
+sil [always_inline] [readonly] [_semantics "string.makeUTF8"] @Swift.String.init(_builtinStringLiteral: Builtin.RawPointer, utf8CodeUnitCount: Builtin.Word, isASCII: Builtin.Int1) -> Swift.String : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String
 
 
 

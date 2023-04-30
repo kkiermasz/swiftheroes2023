@@ -25,7 +25,7 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
 } // end sil function 'main'
 
 // SwiftHeroes.organise()
-sil hidden @$s5class11SwiftHeroesC8organiseyyF : $@convention(method) (@guaranteed SwiftHeroes) -> () {
+sil hidden @class.SwiftHeroes.organise() -> () : $@convention(method) (@guaranteed SwiftHeroes) -> () {
 [%0: noescape **]
 [global: ]
 // %0 "self"                                      // user: %1
@@ -33,10 +33,10 @@ bb0(%0 : $SwiftHeroes):
   debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
   %2 = tuple ()                                   // user: %3
   return %2 : $()                                 // id: %3
-} // end sil function '$s5class11SwiftHeroesC8organiseyyF'
+} // end sil function 'class.SwiftHeroes.organise() -> ()'
 
 // SwiftHeroes.deinit
-sil hidden @$s5class11SwiftHeroesCfd : $@convention(method) (@guaranteed SwiftHeroes) -> @owned Builtin.NativeObject {
+sil hidden @class.SwiftHeroes.deinit : $@convention(method) (@guaranteed SwiftHeroes) -> @owned Builtin.NativeObject {
 [%0: escape => %r, escape c*.v** => %r.c*.v**]
 [global: ]
 // %0 "self"                                      // users: %2, %1
@@ -44,10 +44,10 @@ bb0(%0 : $SwiftHeroes):
   debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
   %2 = unchecked_ref_cast %0 : $SwiftHeroes to $Builtin.NativeObject // user: %3
   return %2 : $Builtin.NativeObject               // id: %3
-} // end sil function '$s5class11SwiftHeroesCfd'
+} // end sil function 'class.SwiftHeroes.deinit'
 
 // SwiftHeroes.__deallocating_deinit
-sil hidden @$s5class11SwiftHeroesCfD : $@convention(method) (@owned SwiftHeroes) -> () {
+sil hidden @class.SwiftHeroes.__deallocating_deinit : $@convention(method) (@owned SwiftHeroes) -> () {
 [%0: noescape **, read c*.v**, write c*.v**, copy c*.v**]
 [global: read,write,copy]
 // %0 "self"                                      // users: %3, %2, %1
@@ -57,30 +57,30 @@ bb0(%0 : $SwiftHeroes):
   dealloc_ref %0 : $SwiftHeroes                   // id: %3
   %4 = tuple ()                                   // user: %5
   return %4 : $()                                 // id: %5
-} // end sil function '$s5class11SwiftHeroesCfD'
+} // end sil function 'class.SwiftHeroes.__deallocating_deinit'
 
 // SwiftHeroes.__allocating_init()
-sil hidden [exact_self_class] @$s5class11SwiftHeroesCACycfC : $@convention(method) (@thick SwiftHeroes.Type) -> @owned SwiftHeroes {
+sil hidden [exact_self_class] @class.SwiftHeroes.__allocating_init() -> class.SwiftHeroes : $@convention(method) (@thick SwiftHeroes.Type) -> @owned SwiftHeroes {
 [global: allocate]
 // %0 "$metatype"
 bb0(%0 : $@thick SwiftHeroes.Type):
   %1 = alloc_ref $SwiftHeroes                     // users: %3, %2
   debug_value %1 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %2
   return %1 : $SwiftHeroes                        // id: %3
-} // end sil function '$s5class11SwiftHeroesCACycfC'
+} // end sil function 'class.SwiftHeroes.__allocating_init() -> class.SwiftHeroes'
 
 // SwiftHeroes.init()
-sil hidden @$s5class11SwiftHeroesCACycfc : $@convention(method) (@owned SwiftHeroes) -> @owned SwiftHeroes {
+sil hidden @class.SwiftHeroes.init() -> class.SwiftHeroes : $@convention(method) (@owned SwiftHeroes) -> @owned SwiftHeroes {
 [%0: escape => %r, escape c*.v** => %r.c*.v**]
 [global: ]
 // %0 "self"                                      // users: %2, %1
 bb0(%0 : $SwiftHeroes):
   debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
   return %0 : $SwiftHeroes                        // id: %2
-} // end sil function '$s5class11SwiftHeroesCACycfc'
+} // end sil function 'class.SwiftHeroes.init() -> class.SwiftHeroes'
 
 // protocol witness for Conference.organise() in conformance SwiftHeroes
-sil private [transparent] [thunk] @$s5class11SwiftHeroesCAA10ConferenceA2aDP8organiseyyFTW : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> () {
+sil private [transparent] [thunk] @protocol witness for class.Conference.organise() -> () in conformance class.SwiftHeroes : class.Conference in class : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> () {
 [%0: read v**, copy v**]
 [global: read,write,copy,destroy,allocate,deinit_barrier]
 // %0                                             // user: %1
@@ -90,16 +90,16 @@ bb0(%0 : $*SwiftHeroes):
   %3 = apply %2(%1) : $@convention(method) (@guaranteed SwiftHeroes) -> ()
   %4 = tuple ()                                   // user: %5
   return %4 : $()                                 // id: %5
-} // end sil function '$s5class11SwiftHeroesCAA10ConferenceA2aDP8organiseyyFTW'
+} // end sil function 'protocol witness for class.Conference.organise() -> () in conformance class.SwiftHeroes : class.Conference in class'
 
 sil_vtable SwiftHeroes {
-  #SwiftHeroes.organise: (SwiftHeroes) -> () -> () : @$s5class11SwiftHeroesC8organiseyyF	// SwiftHeroes.organise()
-  #SwiftHeroes.init!allocator: (SwiftHeroes.Type) -> () -> SwiftHeroes : @$s5class11SwiftHeroesCACycfC	// SwiftHeroes.__allocating_init()
-  #SwiftHeroes.deinit!deallocator: @$s5class11SwiftHeroesCfD	// SwiftHeroes.__deallocating_deinit
+  #SwiftHeroes.organise: (SwiftHeroes) -> () -> () : @class.SwiftHeroes.organise() -> ()	// SwiftHeroes.organise()
+  #SwiftHeroes.init!allocator: (SwiftHeroes.Type) -> () -> SwiftHeroes : @class.SwiftHeroes.__allocating_init() -> class.SwiftHeroes	// SwiftHeroes.__allocating_init()
+  #SwiftHeroes.deinit!deallocator: @class.SwiftHeroes.__deallocating_deinit	// SwiftHeroes.__deallocating_deinit
 }
 
 sil_witness_table hidden SwiftHeroes: Conference module class {
-  method #Conference.organise: <Self where Self : Conference> (Self) -> () -> () : @$s5class11SwiftHeroesCAA10ConferenceA2aDP8organiseyyFTW	// protocol witness for Conference.organise() in conformance SwiftHeroes
+  method #Conference.organise: <Self where Self : Conference> (Self) -> () -> () : @protocol witness for class.Conference.organise() -> () in conformance class.SwiftHeroes : class.Conference in class	// protocol witness for Conference.organise() in conformance SwiftHeroes
 }
 
 

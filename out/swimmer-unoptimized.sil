@@ -21,15 +21,15 @@ struct Fish : Swimmer {
 @_hasStorage @_hasInitialValue let swimmers: [any Swimmer] { get }
 
 // swimmers
-sil_global hidden [let] @$s7swimmer8swimmersSayAA7Swimmer_pGvp : $Array<any Swimmer>
+sil_global hidden [let] @swimmer.swimmers : [swimmer.Swimmer] : $Array<any Swimmer>
 
 // main
 sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
 [%1: noescape **]
 [global: read,write,copy,allocate,deinit_barrier]
 bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
-  alloc_global @$s7swimmer8swimmersSayAA7Swimmer_pGvp // id: %2
-  %3 = global_addr @$s7swimmer8swimmersSayAA7Swimmer_pGvp : $*Array<any Swimmer> // user: %33
+  alloc_global @swimmer.swimmers : [swimmer.Swimmer] // id: %2
+  %3 = global_addr @swimmer.swimmers : [swimmer.Swimmer] : $*Array<any Swimmer> // user: %33
   %4 = integer_literal $Builtin.Word, 3           // user: %7
   %5 = integer_literal $Builtin.Int64, 3          // user: %6
   %6 = struct $Int (%5 : $Builtin.Int64)          // user: %11
@@ -66,78 +66,78 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
 } // end sil function 'main'
 
 // Duck.swim()
-sil hidden @$s7swimmer4DuckV4swimyyF : $@convention(method) (Duck) -> () {
+sil hidden @swimmer.Duck.swim() -> () : $@convention(method) (Duck) -> () {
 [global: ]
 // %0 "self"                                      // user: %1
 bb0(%0 : $Duck):
   debug_value %0 : $Duck, let, name "self", argno 1, implicit // id: %1
   %2 = tuple ()                                   // user: %3
   return %2 : $()                                 // id: %3
-} // end sil function '$s7swimmer4DuckV4swimyyF'
+} // end sil function 'swimmer.Duck.swim() -> ()'
 
 // Duck.init()
-sil hidden @$s7swimmer4DuckVACycfC : $@convention(method) (@thin Duck.Type) -> Duck {
+sil hidden @swimmer.Duck.init() -> swimmer.Duck : $@convention(method) (@thin Duck.Type) -> Duck {
 [global: ]
 // %0 "$metatype"
 bb0(%0 : $@thin Duck.Type):
   %1 = struct $Duck ()                            // user: %2
   return %1 : $Duck                               // id: %2
-} // end sil function '$s7swimmer4DuckVACycfC'
+} // end sil function 'swimmer.Duck.init() -> swimmer.Duck'
 
 // protocol witness for Swimmer.swim() in conformance Duck
-sil private [transparent] [thunk] @$s7swimmer4DuckVAA7SwimmerA2aDP4swimyyFTW : $@convention(witness_method: Swimmer) (@in_guaranteed Duck) -> () {
+sil private [transparent] [thunk] @protocol witness for swimmer.Swimmer.swim() -> () in conformance swimmer.Duck : swimmer.Swimmer in swimmer : $@convention(witness_method: Swimmer) (@in_guaranteed Duck) -> () {
 [global: ]
 bb0(%0 : $*Duck):
   %1 = tuple ()                                   // user: %2
   return %1 : $()                                 // id: %2
-} // end sil function '$s7swimmer4DuckVAA7SwimmerA2aDP4swimyyFTW'
+} // end sil function 'protocol witness for swimmer.Swimmer.swim() -> () in conformance swimmer.Duck : swimmer.Swimmer in swimmer'
 
 // Fish.swim()
-sil hidden @$s7swimmer4FishV4swimyyF : $@convention(method) (Fish) -> () {
+sil hidden @swimmer.Fish.swim() -> () : $@convention(method) (Fish) -> () {
 [global: ]
 // %0 "self"                                      // user: %1
 bb0(%0 : $Fish):
   debug_value %0 : $Fish, let, name "self", argno 1, implicit // id: %1
   %2 = tuple ()                                   // user: %3
   return %2 : $()                                 // id: %3
-} // end sil function '$s7swimmer4FishV4swimyyF'
+} // end sil function 'swimmer.Fish.swim() -> ()'
 
 // Fish.init()
-sil hidden @$s7swimmer4FishVACycfC : $@convention(method) (@thin Fish.Type) -> Fish {
+sil hidden @swimmer.Fish.init() -> swimmer.Fish : $@convention(method) (@thin Fish.Type) -> Fish {
 [global: ]
 // %0 "$metatype"
 bb0(%0 : $@thin Fish.Type):
   %1 = struct $Fish ()                            // user: %2
   return %1 : $Fish                               // id: %2
-} // end sil function '$s7swimmer4FishVACycfC'
+} // end sil function 'swimmer.Fish.init() -> swimmer.Fish'
 
 // protocol witness for Swimmer.swim() in conformance Fish
-sil private [transparent] [thunk] @$s7swimmer4FishVAA7SwimmerA2aDP4swimyyFTW : $@convention(witness_method: Swimmer) (@in_guaranteed Fish) -> () {
+sil private [transparent] [thunk] @protocol witness for swimmer.Swimmer.swim() -> () in conformance swimmer.Fish : swimmer.Swimmer in swimmer : $@convention(witness_method: Swimmer) (@in_guaranteed Fish) -> () {
 [global: ]
 bb0(%0 : $*Fish):
   %1 = tuple ()                                   // user: %2
   return %1 : $()                                 // id: %2
-} // end sil function '$s7swimmer4FishVAA7SwimmerA2aDP4swimyyFTW'
+} // end sil function 'protocol witness for swimmer.Swimmer.swim() -> () in conformance swimmer.Fish : swimmer.Swimmer in swimmer'
 
 // __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
-sil public_external [exact_self_class] @$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC : $@convention(method) (@thick __SwiftNativeNSArrayWithContiguousStorage.Type) -> @owned __SwiftNativeNSArrayWithContiguousStorage {
+sil public_external [exact_self_class] @Swift.__SwiftNativeNSArrayWithContiguousStorage.__allocating_init() -> Swift.__SwiftNativeNSArrayWithContiguousStorage : $@convention(method) (@thick __SwiftNativeNSArrayWithContiguousStorage.Type) -> @owned __SwiftNativeNSArrayWithContiguousStorage {
 bb0(%0 : $@thick __SwiftNativeNSArrayWithContiguousStorage.Type):
   %1 = alloc_ref $__SwiftNativeNSArrayWithContiguousStorage // user: %2
   return %1 : $__SwiftNativeNSArrayWithContiguousStorage // id: %2
-} // end sil function '$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC'
+} // end sil function 'Swift.__SwiftNativeNSArrayWithContiguousStorage.__allocating_init() -> Swift.__SwiftNativeNSArrayWithContiguousStorage'
 
 // _ContiguousArrayStorage.__allocating_init(_doNotCallMeBase:)
-sil public_external [exact_self_class] @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfC : $@convention(method) <Element> (@thick _ContiguousArrayStorage<Element>.Type) -> @owned _ContiguousArrayStorage<Element> {
+sil public_external [exact_self_class] @Swift._ContiguousArrayStorage.__allocating_init(_doNotCallMeBase: ()) -> Swift._ContiguousArrayStorage<A> : $@convention(method) <Element> (@thick _ContiguousArrayStorage<Element>.Type) -> @owned _ContiguousArrayStorage<Element> {
 bb0(%0 : $@thick _ContiguousArrayStorage<Element>.Type):
   %1 = alloc_ref $_ContiguousArrayStorage<Element> // user: %3
   // function_ref _ContiguousArrayStorage.init(_doNotCallMeBase:)
-  %2 = function_ref @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfc : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0> // user: %3
+  %2 = function_ref @Swift._ContiguousArrayStorage.init(_doNotCallMeBase: ()) -> Swift._ContiguousArrayStorage<A> : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0> // user: %3
   %3 = apply %2<Element>(%1) : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0> // user: %4
   return %3 : $_ContiguousArrayStorage<Element>   // id: %4
-} // end sil function '$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfC'
+} // end sil function 'Swift._ContiguousArrayStorage.__allocating_init(_doNotCallMeBase: ()) -> Swift._ContiguousArrayStorage<A>'
 
 // _ContiguousArrayStorage.canStoreElements(ofDynamicType:)
-sil public_external @$ss23_ContiguousArrayStorageC16canStoreElements13ofDynamicTypeSbypXp_tF : $@convention(method) <Element> (@thick any Any.Type, @guaranteed _ContiguousArrayStorage<Element>) -> Bool {
+sil public_external @Swift._ContiguousArrayStorage.canStoreElements(ofDynamicType: Any.Type) -> Swift.Bool : $@convention(method) <Element> (@thick any Any.Type, @guaranteed _ContiguousArrayStorage<Element>) -> Bool {
 [%1: noescape **]
 // %0                                             // user: %2
 bb0(%0 : $@thick any Any.Type, %1 : $_ContiguousArrayStorage<Element>):
@@ -155,41 +155,41 @@ bb2(%5 : $@thick Element.Type):                   // Preds: bb0
 bb3(%8 : $Builtin.Int1):                          // Preds: bb2 bb1
   %9 = struct $Bool (%8 : $Builtin.Int1)          // user: %10
   return %9 : $Bool                               // id: %10
-} // end sil function '$ss23_ContiguousArrayStorageC16canStoreElements13ofDynamicTypeSbypXp_tF'
+} // end sil function 'Swift._ContiguousArrayStorage.canStoreElements(ofDynamicType: Any.Type) -> Swift.Bool'
 
 // _ContiguousArrayStorage.staticElementType.getter
-sil public_external @$ss23_ContiguousArrayStorageC17staticElementTypeypXpvg : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> @thick any Any.Type {
+sil public_external @Swift._ContiguousArrayStorage.staticElementType.getter : Any.Type : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> @thick any Any.Type {
 [%0: noescape **]
 bb0(%0 : $_ContiguousArrayStorage<Element>):
   %1 = metatype $@thick Element.Type              // user: %2
   %2 = init_existential_metatype %1 : $@thick Element.Type, $@thick any Any.Type // user: %3
   return %2 : $@thick any Any.Type                // id: %3
-} // end sil function '$ss23_ContiguousArrayStorageC17staticElementTypeypXpvg'
+} // end sil function 'Swift._ContiguousArrayStorage.staticElementType.getter : Any.Type'
 
 // _ContiguousArrayStorage.__deallocating_deinit
-sil public_external @$ss23_ContiguousArrayStorageCfD : $@convention(method) <Element> (@owned _ContiguousArrayStorage<Element>) -> () {
+sil public_external @Swift._ContiguousArrayStorage.__deallocating_deinit : $@convention(method) <Element> (@owned _ContiguousArrayStorage<Element>) -> () {
 [%0: noescape, noescape c*.v**]
 // %0                                             // user: %2
 bb0(%0 : $_ContiguousArrayStorage<Element>):
   // function_ref _ContiguousArrayStorage.deinit
-  %1 = function_ref @$ss23_ContiguousArrayStorageCfd : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> @owned Builtin.NativeObject // user: %2
+  %1 = function_ref @Swift._ContiguousArrayStorage.deinit : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> @owned Builtin.NativeObject // user: %2
   %2 = apply %1<Element>(%0) : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> @owned Builtin.NativeObject // user: %3
   %3 = unchecked_ref_cast %2 : $Builtin.NativeObject to $_ContiguousArrayStorage<Element> // user: %4
   dealloc_ref %3 : $_ContiguousArrayStorage<Element> // id: %4
   %5 = tuple ()                                   // user: %6
   return %5 : $()                                 // id: %6
-} // end sil function '$ss23_ContiguousArrayStorageCfD'
+} // end sil function 'Swift._ContiguousArrayStorage.__deallocating_deinit'
 
 // _ContiguousArrayStorage.init(_doNotCallMeBase:)
-sil @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfc : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0>
+sil @Swift._ContiguousArrayStorage.init(_doNotCallMeBase: ()) -> Swift._ContiguousArrayStorage<A> : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0>
 
 // _ContiguousArrayStorage.deinit
-sil public_external @$ss23_ContiguousArrayStorageCfd : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> @owned Builtin.NativeObject {
+sil public_external @Swift._ContiguousArrayStorage.deinit : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> @owned Builtin.NativeObject {
 [%0: escape => %r, escape c*.v** => %r.c*.v**]
 // %0                                             // users: %14, %13, %3, %2
 bb0(%0 : $_ContiguousArrayStorage<Element>):
   // function_ref _ContiguousArrayStorage._elementPointer.getter
-  %1 = function_ref @$ss23_ContiguousArrayStorageC15_elementPointerSpyxGvg : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> UnsafeMutablePointer<τ_0_0> // user: %2
+  %1 = function_ref @Swift._ContiguousArrayStorage._elementPointer.getter : Swift.UnsafeMutablePointer<A> : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> UnsafeMutablePointer<τ_0_0> // user: %2
   %2 = apply %1<Element>(%0) : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> UnsafeMutablePointer<τ_0_0> // user: %12
   %3 = upcast %0 : $_ContiguousArrayStorage<Element> to $__ContiguousArrayStorageBase // user: %4
   %4 = ref_element_addr %3 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %5
@@ -200,15 +200,15 @@ bb0(%0 : $_ContiguousArrayStorage<Element>):
   %9 = builtin "assumeNonNegative_Int64"(%8 : $Builtin.Int64) : $Builtin.Int64 // user: %10
   %10 = struct $Int (%9 : $Builtin.Int64)         // user: %12
   // function_ref UnsafeMutablePointer.deinitialize(count:)
-  %11 = function_ref @$sSp12deinitialize5countSvSi_tF : $@convention(method) <τ_0_0> (Int, UnsafeMutablePointer<τ_0_0>) -> UnsafeMutableRawPointer // user: %12
+  %11 = function_ref @Swift.UnsafeMutablePointer.deinitialize(count: Swift.Int) -> Swift.UnsafeMutableRawPointer : $@convention(method) <τ_0_0> (Int, UnsafeMutablePointer<τ_0_0>) -> UnsafeMutableRawPointer // user: %12
   %12 = apply %11<Element>(%10, %2) : $@convention(method) <τ_0_0> (Int, UnsafeMutablePointer<τ_0_0>) -> UnsafeMutableRawPointer
   fix_lifetime %0 : $_ContiguousArrayStorage<Element> // id: %13
   %14 = unchecked_ref_cast %0 : $_ContiguousArrayStorage<Element> to $Builtin.NativeObject // user: %15
   return %14 : $Builtin.NativeObject              // id: %15
-} // end sil function '$ss23_ContiguousArrayStorageCfd'
+} // end sil function 'Swift._ContiguousArrayStorage.deinit'
 
 // _ContiguousArrayStorage._elementPointer.getter
-sil public_external @$ss23_ContiguousArrayStorageC15_elementPointerSpyxGvg : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> UnsafeMutablePointer<Element> {
+sil public_external @Swift._ContiguousArrayStorage._elementPointer.getter : Swift.UnsafeMutablePointer<A> : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> UnsafeMutablePointer<Element> {
 [%0: noescape, escape c*.v** => %r.s0.v**]
 // %0                                             // user: %1
 bb0(%0 : $_ContiguousArrayStorage<Element>):
@@ -216,10 +216,10 @@ bb0(%0 : $_ContiguousArrayStorage<Element>):
   %2 = address_to_pointer %1 : $*Element to $Builtin.RawPointer // user: %3
   %3 = struct $UnsafeMutablePointer<Element> (%2 : $Builtin.RawPointer) // user: %4
   return %3 : $UnsafeMutablePointer<Element>      // id: %4
-} // end sil function '$ss23_ContiguousArrayStorageC15_elementPointerSpyxGvg'
+} // end sil function 'Swift._ContiguousArrayStorage._elementPointer.getter : Swift.UnsafeMutablePointer<A>'
 
 // UnsafeMutablePointer.deinitialize(count:)
-sil public_external @$sSp12deinitialize5countSvSi_tF : $@convention(method) <Pointee> (Int, UnsafeMutablePointer<Pointee>) -> UnsafeMutableRawPointer {
+sil public_external @Swift.UnsafeMutablePointer.deinitialize(count: Swift.Int) -> Swift.UnsafeMutableRawPointer : $@convention(method) <Pointee> (Int, UnsafeMutablePointer<Pointee>) -> UnsafeMutableRawPointer {
 [%1: escape v** => %r.s0.v**]
 // %0                                             // user: %4
 // %1                                             // user: %3
@@ -231,37 +231,37 @@ bb0(%0 : $Int, %1 : $UnsafeMutablePointer<Pointee>):
   %6 = builtin "destroyArray"<Pointee>(%2 : $@thick Pointee.Type, %3 : $Builtin.RawPointer, %5 : $Builtin.Word) : $()
   %7 = struct $UnsafeMutableRawPointer (%3 : $Builtin.RawPointer) // user: %8
   return %7 : $UnsafeMutableRawPointer            // id: %8
-} // end sil function '$sSp12deinitialize5countSvSi_tF'
+} // end sil function 'Swift.UnsafeMutablePointer.deinitialize(count: Swift.Int) -> Swift.UnsafeMutableRawPointer'
 
 // __SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit
-sil public_external @$ss41__SwiftNativeNSArrayWithContiguousStorageCfD : $@convention(method) (@owned __SwiftNativeNSArrayWithContiguousStorage) -> () {
+sil public_external @Swift.__SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit : $@convention(method) (@owned __SwiftNativeNSArrayWithContiguousStorage) -> () {
 [%0: noescape **]
 // %0                                             // user: %1
 bb0(%0 : $__SwiftNativeNSArrayWithContiguousStorage):
   dealloc_ref %0 : $__SwiftNativeNSArrayWithContiguousStorage // id: %1
   %2 = tuple ()                                   // user: %3
   return %2 : $()                                 // id: %3
-} // end sil function '$ss41__SwiftNativeNSArrayWithContiguousStorageCfD'
+} // end sil function 'Swift.__SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit'
 
 sil_vtable _ContiguousArrayStorage {
-  #__SwiftNativeNSArray.init!allocator: (__SwiftNativeNSArray.Type) -> () -> __SwiftNativeNSArray : @$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC [inherited]	// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
-  #__ContiguousArrayStorageBase.init!allocator: (__ContiguousArrayStorageBase.Type) -> (()) -> __ContiguousArrayStorageBase : @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfC [override]	// _ContiguousArrayStorage.__allocating_init(_doNotCallMeBase:)
-  #__ContiguousArrayStorageBase.canStoreElements: (__ContiguousArrayStorageBase) -> (any Any.Type) -> Bool : @$ss23_ContiguousArrayStorageC16canStoreElements13ofDynamicTypeSbypXp_tF [override]	// _ContiguousArrayStorage.canStoreElements(ofDynamicType:)
-  #__ContiguousArrayStorageBase.staticElementType!getter: (__ContiguousArrayStorageBase) -> () -> any Any.Type : @$ss23_ContiguousArrayStorageC17staticElementTypeypXpvg [override]	// _ContiguousArrayStorage.staticElementType.getter
-  #_ContiguousArrayStorage.deinit!deallocator: @$ss23_ContiguousArrayStorageCfD	// _ContiguousArrayStorage.__deallocating_deinit
+  #__SwiftNativeNSArray.init!allocator: (__SwiftNativeNSArray.Type) -> () -> __SwiftNativeNSArray : @Swift.__SwiftNativeNSArrayWithContiguousStorage.__allocating_init() -> Swift.__SwiftNativeNSArrayWithContiguousStorage [inherited]	// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
+  #__ContiguousArrayStorageBase.init!allocator: (__ContiguousArrayStorageBase.Type) -> (()) -> __ContiguousArrayStorageBase : @Swift._ContiguousArrayStorage.__allocating_init(_doNotCallMeBase: ()) -> Swift._ContiguousArrayStorage<A> [override]	// _ContiguousArrayStorage.__allocating_init(_doNotCallMeBase:)
+  #__ContiguousArrayStorageBase.canStoreElements: (__ContiguousArrayStorageBase) -> (any Any.Type) -> Bool : @Swift._ContiguousArrayStorage.canStoreElements(ofDynamicType: Any.Type) -> Swift.Bool [override]	// _ContiguousArrayStorage.canStoreElements(ofDynamicType:)
+  #__ContiguousArrayStorageBase.staticElementType!getter: (__ContiguousArrayStorageBase) -> () -> any Any.Type : @Swift._ContiguousArrayStorage.staticElementType.getter : Any.Type [override]	// _ContiguousArrayStorage.staticElementType.getter
+  #_ContiguousArrayStorage.deinit!deallocator: @Swift._ContiguousArrayStorage.__deallocating_deinit	// _ContiguousArrayStorage.__deallocating_deinit
 }
 
 sil_vtable __SwiftNativeNSArrayWithContiguousStorage {
-  #__SwiftNativeNSArray.init!allocator: (__SwiftNativeNSArray.Type) -> () -> __SwiftNativeNSArray : @$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC [override]	// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
-  #__SwiftNativeNSArrayWithContiguousStorage.deinit!deallocator: @$ss41__SwiftNativeNSArrayWithContiguousStorageCfD	// __SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit
+  #__SwiftNativeNSArray.init!allocator: (__SwiftNativeNSArray.Type) -> () -> __SwiftNativeNSArray : @Swift.__SwiftNativeNSArrayWithContiguousStorage.__allocating_init() -> Swift.__SwiftNativeNSArrayWithContiguousStorage [override]	// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
+  #__SwiftNativeNSArrayWithContiguousStorage.deinit!deallocator: @Swift.__SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit	// __SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit
 }
 
 sil_witness_table hidden Duck: Swimmer module swimmer {
-  method #Swimmer.swim: <Self where Self : Swimmer> (Self) -> () -> () : @$s7swimmer4DuckVAA7SwimmerA2aDP4swimyyFTW	// protocol witness for Swimmer.swim() in conformance Duck
+  method #Swimmer.swim: <Self where Self : Swimmer> (Self) -> () -> () : @protocol witness for swimmer.Swimmer.swim() -> () in conformance swimmer.Duck : swimmer.Swimmer in swimmer	// protocol witness for Swimmer.swim() in conformance Duck
 }
 
 sil_witness_table hidden Fish: Swimmer module swimmer {
-  method #Swimmer.swim: <Self where Self : Swimmer> (Self) -> () -> () : @$s7swimmer4FishVAA7SwimmerA2aDP4swimyyFTW	// protocol witness for Swimmer.swim() in conformance Fish
+  method #Swimmer.swim: <Self where Self : Swimmer> (Self) -> () -> () : @protocol witness for swimmer.Swimmer.swim() -> () in conformance swimmer.Fish : swimmer.Swimmer in swimmer	// protocol witness for Swimmer.swim() in conformance Fish
 }
 
 
