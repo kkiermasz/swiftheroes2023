@@ -1,0 +1,41 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+}
+
+struct SwiftHeroes : Conference {
+  init()
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+[%1: noescape **]
+[global: ]
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// SwiftHeroes.init()
+sil hidden @$s4main11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
+[global: ]
+// %0 "$metatype"
+bb0(%0 : $@thin SwiftHeroes.Type):
+  %1 = struct $SwiftHeroes ()                     // user: %2
+  return %1 : $SwiftHeroes                        // id: %2
+} // end sil function '$s4main11SwiftHeroesVACycfC'
+
+sil_witness_table hidden SwiftHeroes: Conference module main {
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/struct-protocol-conformance-empty.swift' => 'src/struct-protocol-conformance-empty.swift'
+
+

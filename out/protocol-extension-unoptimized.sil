@@ -1,0 +1,309 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+  func foo()
+}
+
+extension Conference {
+  func foo()
+  func goo()
+}
+
+struct SwiftHeroes : Conference {
+  func foo()
+  func goo()
+  init()
+}
+
+@_hasStorage @_hasInitialValue let swiftHeroes: any Conference { get }
+
+// swiftHeroes
+sil_global hidden [let] @$s4main11swiftHeroesAA10Conference_pvp : $any Conference
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  alloc_global @$s4main11swiftHeroesAA10Conference_pvp // id: %2
+  %3 = global_addr @$s4main11swiftHeroesAA10Conference_pvp : $*any Conference // users: %12, %9, %7
+  %4 = metatype $@thin SwiftHeroes.Type           // user: %6
+  // function_ref SwiftHeroes.init()
+  %5 = function_ref @$s4main11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes // user: %6
+  %6 = apply %5(%4) : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes // user: %8
+  %7 = init_existential_addr %3 : $*any Conference, $SwiftHeroes // user: %8
+  store %6 to %7 : $*SwiftHeroes                  // id: %8
+  %9 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("87DD4DA2-E72E-11ED-8EA8-96B3AA0BE17C", any Conference) Self // users: %11, %11, %10
+  %10 = witness_method $@opened("87DD4DA2-E72E-11ED-8EA8-96B3AA0BE17C", any Conference) Self, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %9 : $*@opened("87DD4DA2-E72E-11ED-8EA8-96B3AA0BE17C", any Conference) Self : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %9; user: %11
+  %11 = apply %10<@opened("87DD4DA2-E72E-11ED-8EA8-96B3AA0BE17C", any Conference) Self>(%9) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %9
+  %12 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("87DD5194-E72E-11ED-8EA8-96B3AA0BE17C", any Conference) Self // users: %14, %14
+  // function_ref Conference.goo()
+  %13 = function_ref @$s4main10ConferencePAAE3gooyyF : $@convention(method) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // user: %14
+  %14 = apply %13<@opened("87DD5194-E72E-11ED-8EA8-96B3AA0BE17C", any Conference) Self>(%12) : $@convention(method) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %12
+  %15 = integer_literal $Builtin.Int32, 0         // user: %16
+  %16 = struct $Int32 (%15 : $Builtin.Int32)      // user: %17
+  return %16 : $Int32                             // id: %17
+} // end sil function 'main'
+
+// Conference.foo()
+sil hidden @$s4main10ConferencePAAE3fooyyF : $@convention(method) <Self where Self : Conference> (@in_guaranteed Self) -> () {
+// %0 "self"                                      // user: %1
+bb0(%0 : $*Self):
+  debug_value %0 : $*Self, let, name "self", argno 1, implicit, expr op_deref // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
+  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %6, %5
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // user: %17
+  %6 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %7
+  %7 = pointer_to_address %6 : $Builtin.RawPointer to [strict] $*Any // user: %14
+  %8 = string_literal utf8 "Conference foo"       // user: %13
+  %9 = integer_literal $Builtin.Word, 14          // user: %13
+  %10 = integer_literal $Builtin.Int1, -1         // user: %13
+  %11 = metatype $@thin String.Type               // user: %13
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %12 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %13
+  %13 = apply %12(%8, %9, %10, %11) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %15
+  %14 = init_existential_addr %7 : $*Any, $String // user: %15
+  store %13 to %14 : $*String                     // id: %15
+  // function_ref _finalizeUninitializedArray<A>(_:)
+  %16 = function_ref @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // user: %17
+  %17 = apply %16<Any>(%5) : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // users: %26, %23
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %18 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %20 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
+  // function_ref print(_:separator:terminator:)
+  %22 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%17, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %17 : $Array<Any>                 // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
+} // end sil function '$s4main10ConferencePAAE3fooyyF'
+
+// _allocateUninitializedArray<A>(_:)
+sil [always_inline] [_semantics "array.uninitialized_intrinsic"] @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer)
+
+// String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+sil [always_inline] [readonly] [_semantics "string.makeUTF8"] @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String
+
+// _finalizeUninitializedArray<A>(_:)
+sil shared [readnone] [_semantics "array.finalize_intrinsic"] @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <Element> (@owned Array<Element>) -> @owned Array<Element> {
+[%0: escape! v** => %r.v**, escape! v**.c*.v** => %r.v**.c*.v**]
+// %0                                             // user: %2
+bb0(%0 : $Array<Element>):
+  %1 = alloc_stack $Array<Element>                // users: %6, %5, %4, %2
+  store %0 to %1 : $*Array<Element>               // id: %2
+  // function_ref Array._endMutation()
+  %3 = function_ref @$sSa12_endMutationyyF : $@convention(method) <τ_0_0> (@inout Array<τ_0_0>) -> () // user: %4
+  %4 = apply %3<Element>(%1) : $@convention(method) <τ_0_0> (@inout Array<τ_0_0>) -> ()
+  %5 = load %1 : $*Array<Element>                 // user: %7
+  dealloc_stack %1 : $*Array<Element>             // id: %6
+  return %5 : $Array<Element>                     // id: %7
+} // end sil function '$ss27_finalizeUninitializedArrayySayxGABnlF'
+
+// default argument 1 of print(_:separator:terminator:)
+sil shared @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String {
+bb0:
+  %0 = string_literal utf8 " "                    // user: %5
+  %1 = integer_literal $Builtin.Word, 1           // user: %5
+  %2 = integer_literal $Builtin.Int1, -1          // user: %5
+  %3 = metatype $@thin String.Type                // user: %5
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %4 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %5
+  %5 = apply %4(%0, %1, %2, %3) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %6
+  return %5 : $String                             // id: %6
+} // end sil function '$ss5print_9separator10terminatoryypd_S2StFfA0_'
+
+// default argument 2 of print(_:separator:terminator:)
+sil shared @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String {
+bb0:
+  %0 = string_literal utf8 "\n"                   // user: %5
+  %1 = integer_literal $Builtin.Word, 1           // user: %5
+  %2 = integer_literal $Builtin.Int1, -1          // user: %5
+  %3 = metatype $@thin String.Type                // user: %5
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %4 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %5
+  %5 = apply %4(%0, %1, %2, %3) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %6
+  return %5 : $String                             // id: %6
+} // end sil function '$ss5print_9separator10terminatoryypd_S2StFfA1_'
+
+// print(_:separator:terminator:)
+sil @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+
+// Conference.goo()
+sil hidden @$s4main10ConferencePAAE3gooyyF : $@convention(method) <Self where Self : Conference> (@in_guaranteed Self) -> () {
+// %0 "self"                                      // user: %1
+bb0(%0 : $*Self):
+  debug_value %0 : $*Self, let, name "self", argno 1, implicit, expr op_deref // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
+  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %6, %5
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // user: %17
+  %6 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %7
+  %7 = pointer_to_address %6 : $Builtin.RawPointer to [strict] $*Any // user: %14
+  %8 = string_literal utf8 "Conference goo"       // user: %13
+  %9 = integer_literal $Builtin.Word, 14          // user: %13
+  %10 = integer_literal $Builtin.Int1, -1         // user: %13
+  %11 = metatype $@thin String.Type               // user: %13
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %12 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %13
+  %13 = apply %12(%8, %9, %10, %11) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %15
+  %14 = init_existential_addr %7 : $*Any, $String // user: %15
+  store %13 to %14 : $*String                     // id: %15
+  // function_ref _finalizeUninitializedArray<A>(_:)
+  %16 = function_ref @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // user: %17
+  %17 = apply %16<Any>(%5) : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // users: %26, %23
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %18 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %20 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
+  // function_ref print(_:separator:terminator:)
+  %22 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%17, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %17 : $Array<Any>                 // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
+} // end sil function '$s4main10ConferencePAAE3gooyyF'
+
+// SwiftHeroes.foo()
+sil hidden @$s4main11SwiftHeroesV3fooyyF : $@convention(method) (SwiftHeroes) -> () {
+// %0 "self"                                      // user: %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
+  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %6, %5
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // user: %17
+  %6 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %7
+  %7 = pointer_to_address %6 : $Builtin.RawPointer to [strict] $*Any // user: %14
+  %8 = string_literal utf8 "SwiftHeroes foo"      // user: %13
+  %9 = integer_literal $Builtin.Word, 15          // user: %13
+  %10 = integer_literal $Builtin.Int1, -1         // user: %13
+  %11 = metatype $@thin String.Type               // user: %13
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %12 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %13
+  %13 = apply %12(%8, %9, %10, %11) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %15
+  %14 = init_existential_addr %7 : $*Any, $String // user: %15
+  store %13 to %14 : $*String                     // id: %15
+  // function_ref _finalizeUninitializedArray<A>(_:)
+  %16 = function_ref @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // user: %17
+  %17 = apply %16<Any>(%5) : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // users: %26, %23
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %18 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %20 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
+  // function_ref print(_:separator:terminator:)
+  %22 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%17, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %17 : $Array<Any>                 // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
+} // end sil function '$s4main11SwiftHeroesV3fooyyF'
+
+// SwiftHeroes.goo()
+sil hidden @$s4main11SwiftHeroesV3gooyyF : $@convention(method) (SwiftHeroes) -> () {
+// %0 "self"                                      // user: %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %4
+  // function_ref _allocateUninitializedArray<A>(_:)
+  %3 = function_ref @$ss27_allocateUninitializedArrayySayxG_BptBwlF : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // user: %4
+  %4 = apply %3<Any>(%2) : $@convention(thin) <τ_0_0> (Builtin.Word) -> (@owned Array<τ_0_0>, Builtin.RawPointer) // users: %6, %5
+  %5 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 0 // user: %17
+  %6 = tuple_extract %4 : $(Array<Any>, Builtin.RawPointer), 1 // user: %7
+  %7 = pointer_to_address %6 : $Builtin.RawPointer to [strict] $*Any // user: %14
+  %8 = string_literal utf8 "SwiftHeroes goo"      // user: %13
+  %9 = integer_literal $Builtin.Word, 15          // user: %13
+  %10 = integer_literal $Builtin.Int1, -1         // user: %13
+  %11 = metatype $@thin String.Type               // user: %13
+  // function_ref String.init(_builtinStringLiteral:utf8CodeUnitCount:isASCII:)
+  %12 = function_ref @$sSS21_builtinStringLiteral17utf8CodeUnitCount7isASCIISSBp_BwBi1_tcfC : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %13
+  %13 = apply %12(%8, %9, %10, %11) : $@convention(method) (Builtin.RawPointer, Builtin.Word, Builtin.Int1, @thin String.Type) -> @owned String // user: %15
+  %14 = init_existential_addr %7 : $*Any, $String // user: %15
+  store %13 to %14 : $*String                     // id: %15
+  // function_ref _finalizeUninitializedArray<A>(_:)
+  %16 = function_ref @$ss27_finalizeUninitializedArrayySayxGABnlF : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // user: %17
+  %17 = apply %16<Any>(%5) : $@convention(thin) <τ_0_0> (@owned Array<τ_0_0>) -> @owned Array<τ_0_0> // users: %26, %23
+  // function_ref default argument 1 of print(_:separator:terminator:)
+  %18 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA0_ : $@convention(thin) () -> @owned String // user: %19
+  %19 = apply %18() : $@convention(thin) () -> @owned String // users: %25, %23
+  // function_ref default argument 2 of print(_:separator:terminator:)
+  %20 = function_ref @$ss5print_9separator10terminatoryypd_S2StFfA1_ : $@convention(thin) () -> @owned String // user: %21
+  %21 = apply %20() : $@convention(thin) () -> @owned String // users: %24, %23
+  // function_ref print(_:separator:terminator:)
+  %22 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %23
+  %23 = apply %22(%17, %19, %21) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  release_value %21 : $String                     // id: %24
+  release_value %19 : $String                     // id: %25
+  release_value %17 : $Array<Any>                 // id: %26
+  %27 = tuple ()                                  // user: %28
+  return %27 : $()                                // id: %28
+} // end sil function '$s4main11SwiftHeroesV3gooyyF'
+
+// SwiftHeroes.init()
+sil hidden @$s4main11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
+// %0 "$metatype"
+bb0(%0 : $@thin SwiftHeroes.Type):
+  %1 = alloc_stack $SwiftHeroes, var, name "self", implicit // user: %3
+  %2 = struct $SwiftHeroes ()                     // user: %4
+  dealloc_stack %1 : $*SwiftHeroes                // id: %3
+  return %2 : $SwiftHeroes                        // id: %4
+} // end sil function '$s4main11SwiftHeroesVACycfC'
+
+// protocol witness for Conference.foo() in conformance SwiftHeroes
+sil private [transparent] [thunk] @$s4main11SwiftHeroesVAA10ConferenceA2aDP3fooyyFTW : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> () {
+// %0                                             // user: %1
+bb0(%0 : $*SwiftHeroes):
+  %1 = load %0 : $*SwiftHeroes                    // user: %3
+  // function_ref SwiftHeroes.foo()
+  %2 = function_ref @$s4main11SwiftHeroesV3fooyyF : $@convention(method) (SwiftHeroes) -> () // user: %3
+  %3 = apply %2(%1) : $@convention(method) (SwiftHeroes) -> ()
+  %4 = tuple ()                                   // user: %5
+  return %4 : $()                                 // id: %5
+} // end sil function '$s4main11SwiftHeroesVAA10ConferenceA2aDP3fooyyFTW'
+
+// Array._endMutation()
+sil shared [_semantics "array.end_mutation"] @$sSa12_endMutationyyF : $@convention(method) <Element> (@inout Array<Element>) -> () {
+[%0: noescape! **]
+// %0                                             // users: %9, %1
+bb0(%0 : $*Array<Element>):
+  %1 = struct_element_addr %0 : $*Array<Element>, #Array._buffer // user: %2
+  %2 = struct_element_addr %1 : $*_ArrayBuffer<Element>, #_ArrayBuffer._storage // user: %3
+  %3 = struct_element_addr %2 : $*_BridgeStorage<__ContiguousArrayStorageBase>, #_BridgeStorage.rawValue // user: %4
+  %4 = load %3 : $*Builtin.BridgeObject           // user: %5
+  %5 = end_cow_mutation %4 : $Builtin.BridgeObject // user: %6
+  %6 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%5 : $Builtin.BridgeObject) // user: %7
+  %7 = struct $_ArrayBuffer<Element> (%6 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %8
+  %8 = struct $Array<Element> (%7 : $_ArrayBuffer<Element>) // user: %9
+  store %8 to %0 : $*Array<Element>               // id: %9
+  %10 = tuple ()                                  // user: %11
+  return %10 : $()                                // id: %11
+} // end sil function '$sSa12_endMutationyyF'
+
+sil_witness_table hidden SwiftHeroes: Conference module main {
+  method #Conference.foo: <Self where Self : Conference> (Self) -> () -> () : @$s4main11SwiftHeroesVAA10ConferenceA2aDP3fooyyFTW	// protocol witness for Conference.foo() in conformance SwiftHeroes
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/protocol-extension.swift' => 'src/protocol-extension.swift'
+
+

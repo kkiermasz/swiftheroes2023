@@ -1,0 +1,26 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+  var speakers: [Int] { get }
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+[%1: noescape **]
+[global: ]
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'protocol/protocol.swift' => 'src/protocol.swift'
+
+

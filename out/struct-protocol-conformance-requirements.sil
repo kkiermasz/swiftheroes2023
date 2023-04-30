@@ -1,0 +1,76 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+  var numberOfAttendees: Int { get }
+}
+
+struct SwiftHeroes : Conference {
+  @_hasStorage @_hasInitialValue let numberOfAttendees: Int { get }
+  init()
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+[%1: noescape **]
+[global: ]
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// variable initialization expression of SwiftHeroes.numberOfAttendees
+sil hidden [transparent] @$s4main11SwiftHeroesV17numberOfAttendeesSivpfi : $@convention(thin) () -> Int {
+[global: ]
+bb0:
+  %0 = integer_literal $Builtin.Int64, 0          // user: %1
+  %1 = struct $Int (%0 : $Builtin.Int64)          // user: %2
+  return %1 : $Int                                // id: %2
+} // end sil function '$s4main11SwiftHeroesV17numberOfAttendeesSivpfi'
+
+// SwiftHeroes.numberOfAttendees.getter
+sil hidden [transparent] @$s4main11SwiftHeroesV17numberOfAttendeesSivg : $@convention(method) (SwiftHeroes) -> Int {
+[global: ]
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  %2 = struct_extract %0 : $SwiftHeroes, #SwiftHeroes.numberOfAttendees // user: %3
+  return %2 : $Int                                // id: %3
+} // end sil function '$s4main11SwiftHeroesV17numberOfAttendeesSivg'
+
+// SwiftHeroes.init()
+sil hidden @$s4main11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
+[global: ]
+// %0 "$metatype"
+bb0(%0 : $@thin SwiftHeroes.Type):
+  %1 = integer_literal $Builtin.Int64, 0          // user: %2
+  %2 = struct $Int (%1 : $Builtin.Int64)          // user: %3
+  %3 = struct $SwiftHeroes (%2 : $Int)            // user: %4
+  return %3 : $SwiftHeroes                        // id: %4
+} // end sil function '$s4main11SwiftHeroesVACycfC'
+
+// protocol witness for Conference.numberOfAttendees.getter in conformance SwiftHeroes
+sil private [transparent] [thunk] @$s4main11SwiftHeroesVAA10ConferenceA2aDP17numberOfAttendeesSivgTW : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> Int {
+[%0: read s0.v**]
+[global: ]
+// %0                                             // user: %1
+bb0(%0 : $*SwiftHeroes):
+  %1 = struct_element_addr %0 : $*SwiftHeroes, #SwiftHeroes.numberOfAttendees // user: %2
+  %2 = load %1 : $*Int                            // user: %3
+  return %2 : $Int                                // id: %3
+} // end sil function '$s4main11SwiftHeroesVAA10ConferenceA2aDP17numberOfAttendeesSivgTW'
+
+sil_witness_table hidden SwiftHeroes: Conference module main {
+  method #Conference.numberOfAttendees!getter: <Self where Self : Conference> (Self) -> () -> Int : @$s4main11SwiftHeroesVAA10ConferenceA2aDP17numberOfAttendeesSivgTW	// protocol witness for Conference.numberOfAttendees.getter in conformance SwiftHeroes
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/struct-protocol-conformance-requirements.swift' => 'src/struct-protocol-conformance-requirements.swift'
+
+

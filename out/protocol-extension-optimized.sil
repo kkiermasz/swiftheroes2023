@@ -1,0 +1,503 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+  func foo()
+}
+
+extension Conference {
+  func foo()
+  func goo()
+}
+
+struct SwiftHeroes : Conference {
+  func foo()
+  func goo()
+  init()
+}
+
+@_hasStorage @_hasInitialValue let swiftHeroes: any Conference { get }
+
+// swiftHeroes
+sil_global hidden [let] @$s4main11swiftHeroesAA10Conference_pvp : $any Conference
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+[%1: noescape **]
+[global: read,write,copy,destroy,allocate,deinit_barrier]
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  alloc_global @$s4main11swiftHeroesAA10Conference_pvp // id: %2
+  %3 = global_addr @$s4main11swiftHeroesAA10Conference_pvp : $*any Conference // users: %7, %5
+  %4 = struct $SwiftHeroes ()                     // user: %6
+  %5 = init_existential_addr %3 : $*any Conference, $SwiftHeroes // user: %6
+  store %4 to %5 : $*SwiftHeroes                  // id: %6
+  %7 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("87BE5B5E-E72E-11ED-A8D1-96B3AA0BE17C", any Conference) Self // users: %9, %9, %8
+  %8 = witness_method $@opened("87BE5B5E-E72E-11ED-A8D1-96B3AA0BE17C", any Conference) Self, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %7 : $*@opened("87BE5B5E-E72E-11ED-A8D1-96B3AA0BE17C", any Conference) Self : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7; user: %9
+  %9 = apply %8<@opened("87BE5B5E-E72E-11ED-A8D1-96B3AA0BE17C", any Conference) Self>(%7) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7
+  %10 = integer_literal $Builtin.Word, 1          // user: %13
+  %11 = integer_literal $Builtin.Int64, 1         // user: %12
+  %12 = struct $Int (%11 : $Builtin.Int64)        // user: %17
+  %13 = alloc_ref [tail_elems $Any * %10 : $Builtin.Word] $_ContiguousArrayStorage<Any> // users: %31, %14
+  %14 = upcast %13 : $_ContiguousArrayStorage<Any> to $__ContiguousArrayStorageBase // users: %21, %19
+  %15 = integer_literal $Builtin.Int64, 2         // user: %16
+  %16 = struct $UInt (%15 : $Builtin.Int64)       // user: %17
+  %17 = struct $_SwiftArrayBodyStorage (%12 : $Int, %16 : $UInt) // user: %18
+  %18 = struct $_ArrayBody (%17 : $_SwiftArrayBodyStorage) // user: %20
+  %19 = ref_element_addr %14 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %20
+  store %18 to %19 : $*_ArrayBody                 // id: %20
+  %21 = ref_tail_addr %14 : $__ContiguousArrayStorageBase, $Any // user: %29
+  %22 = integer_literal $Builtin.Int64, 7954890096655626051 // user: %23
+  %23 = struct $UInt64 (%22 : $Builtin.Int64)     // user: %26
+  %24 = integer_literal $Builtin.Int64, -1296914168420473501 // user: %25
+  %25 = value_to_bridge_object %24 : $Builtin.Int64 // user: %26
+  %26 = struct $_StringObject (%23 : $UInt64, %25 : $Builtin.BridgeObject) // user: %27
+  %27 = struct $_StringGuts (%26 : $_StringObject) // user: %28
+  %28 = struct $String (%27 : $_StringGuts)       // user: %30
+  %29 = init_existential_addr %21 : $*Any, $String // user: %30
+  store %28 to %29 : $*String                     // id: %30
+  %31 = end_cow_mutation %13 : $_ContiguousArrayStorage<Any> // users: %50, %32
+  %32 = unchecked_ref_cast %31 : $_ContiguousArrayStorage<Any> to $Builtin.BridgeObject // user: %33
+  %33 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%32 : $Builtin.BridgeObject) // user: %34
+  %34 = struct $_ArrayBuffer<Any> (%33 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %35
+  %35 = struct $Array<Any> (%34 : $_ArrayBuffer<Any>) // user: %49
+  %36 = integer_literal $Builtin.Int64, 32        // user: %37
+  %37 = struct $UInt64 (%36 : $Builtin.Int64)     // user: %40
+  %38 = integer_literal $Builtin.Int64, -2233785415175766016 // user: %39
+  %39 = value_to_bridge_object %38 : $Builtin.Int64 // users: %45, %40
+  %40 = struct $_StringObject (%37 : $UInt64, %39 : $Builtin.BridgeObject) // user: %41
+  %41 = struct $_StringGuts (%40 : $_StringObject) // user: %42
+  %42 = struct $String (%41 : $_StringGuts)       // user: %49
+  %43 = integer_literal $Builtin.Int64, 10        // user: %44
+  %44 = struct $UInt64 (%43 : $Builtin.Int64)     // user: %45
+  %45 = struct $_StringObject (%44 : $UInt64, %39 : $Builtin.BridgeObject) // user: %46
+  %46 = struct $_StringGuts (%45 : $_StringObject) // user: %47
+  %47 = struct $String (%46 : $_StringGuts)       // user: %49
+  // function_ref print(_:separator:terminator:)
+  %48 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %49
+  %49 = apply %48(%35, %42, %47) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  strong_release %31 : $_ContiguousArrayStorage<Any> // id: %50
+  %51 = integer_literal $Builtin.Int32, 0         // user: %52
+  %52 = struct $Int32 (%51 : $Builtin.Int32)      // user: %53
+  return %52 : $Int32                             // id: %53
+} // end sil function 'main'
+
+// Conference.foo()
+sil hidden @$s4main10ConferencePAAE3fooyyF : $@convention(method) <Self where Self : Conference> (@in_guaranteed Self) -> () {
+[%0: noescape **, read v**, copy v**]
+[global: read,write,copy,destroy,allocate,deinit_barrier]
+// %0 "self"                                      // user: %1
+bb0(%0 : $*Self):
+  debug_value %0 : $*Self, let, name "self", argno 1, implicit, expr op_deref // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %5
+  %3 = integer_literal $Builtin.Int64, 1          // user: %4
+  %4 = struct $Int (%3 : $Builtin.Int64)          // user: %9
+  %5 = alloc_ref [tail_elems $Any * %2 : $Builtin.Word] $_ContiguousArrayStorage<Any> // users: %23, %6
+  %6 = upcast %5 : $_ContiguousArrayStorage<Any> to $__ContiguousArrayStorageBase // users: %13, %11
+  %7 = integer_literal $Builtin.Int64, 2          // user: %8
+  %8 = struct $UInt (%7 : $Builtin.Int64)         // user: %9
+  %9 = struct $_SwiftArrayBodyStorage (%4 : $Int, %8 : $UInt) // user: %10
+  %10 = struct $_ArrayBody (%9 : $_SwiftArrayBodyStorage) // user: %12
+  %11 = ref_element_addr %6 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %12
+  store %10 to %11 : $*_ArrayBody                 // id: %12
+  %13 = ref_tail_addr %6 : $__ContiguousArrayStorageBase, $Any // user: %21
+  %14 = integer_literal $Builtin.Int64, 7954890096655626051 // user: %15
+  %15 = struct $UInt64 (%14 : $Builtin.Int64)     // user: %18
+  %16 = integer_literal $Builtin.Int64, -1296914168437250717 // user: %17
+  %17 = value_to_bridge_object %16 : $Builtin.Int64 // user: %18
+  %18 = struct $_StringObject (%15 : $UInt64, %17 : $Builtin.BridgeObject) // user: %19
+  %19 = struct $_StringGuts (%18 : $_StringObject) // user: %20
+  %20 = struct $String (%19 : $_StringGuts)       // user: %22
+  %21 = init_existential_addr %13 : $*Any, $String // user: %22
+  store %20 to %21 : $*String                     // id: %22
+  %23 = end_cow_mutation %5 : $_ContiguousArrayStorage<Any> // users: %42, %24
+  %24 = unchecked_ref_cast %23 : $_ContiguousArrayStorage<Any> to $Builtin.BridgeObject // user: %25
+  %25 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%24 : $Builtin.BridgeObject) // user: %26
+  %26 = struct $_ArrayBuffer<Any> (%25 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %27
+  %27 = struct $Array<Any> (%26 : $_ArrayBuffer<Any>) // user: %41
+  %28 = integer_literal $Builtin.Int64, 32        // user: %29
+  %29 = struct $UInt64 (%28 : $Builtin.Int64)     // user: %32
+  %30 = integer_literal $Builtin.Int64, -2233785415175766016 // user: %31
+  %31 = value_to_bridge_object %30 : $Builtin.Int64 // users: %37, %32
+  %32 = struct $_StringObject (%29 : $UInt64, %31 : $Builtin.BridgeObject) // user: %33
+  %33 = struct $_StringGuts (%32 : $_StringObject) // user: %34
+  %34 = struct $String (%33 : $_StringGuts)       // user: %41
+  %35 = integer_literal $Builtin.Int64, 10        // user: %36
+  %36 = struct $UInt64 (%35 : $Builtin.Int64)     // user: %37
+  %37 = struct $_StringObject (%36 : $UInt64, %31 : $Builtin.BridgeObject) // user: %38
+  %38 = struct $_StringGuts (%37 : $_StringObject) // user: %39
+  %39 = struct $String (%38 : $_StringGuts)       // user: %41
+  // function_ref print(_:separator:terminator:)
+  %40 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %41
+  %41 = apply %40(%27, %34, %39) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  strong_release %23 : $_ContiguousArrayStorage<Any> // id: %42
+  %43 = tuple ()                                  // user: %44
+  return %43 : $()                                // id: %44
+} // end sil function '$s4main10ConferencePAAE3fooyyF'
+
+// print(_:separator:terminator:)
+sil @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+
+// Conference.goo()
+sil hidden [signature_optimized_thunk] [always_inline] @$s4main10ConferencePAAE3gooyyF : $@convention(method) <Self where Self : Conference> (@in_guaranteed Self) -> () {
+[%0: noescape **]
+[global: read,write,copy,destroy,allocate,deinit_barrier]
+// %0 "self"
+bb0(%0 : $*Self):
+  %1 = integer_literal $Builtin.Word, 1           // user: %4
+  %2 = integer_literal $Builtin.Int64, 1          // user: %3
+  %3 = struct $Int (%2 : $Builtin.Int64)          // user: %8
+  %4 = alloc_ref [tail_elems $Any * %1 : $Builtin.Word] $_ContiguousArrayStorage<Any> // users: %22, %5
+  %5 = upcast %4 : $_ContiguousArrayStorage<Any> to $__ContiguousArrayStorageBase // users: %12, %10
+  %6 = integer_literal $Builtin.Int64, 2          // user: %7
+  %7 = struct $UInt (%6 : $Builtin.Int64)         // user: %8
+  %8 = struct $_SwiftArrayBodyStorage (%3 : $Int, %7 : $UInt) // user: %9
+  %9 = struct $_ArrayBody (%8 : $_SwiftArrayBodyStorage) // user: %11
+  %10 = ref_element_addr %5 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %11
+  store %9 to %10 : $*_ArrayBody                  // id: %11
+  %12 = ref_tail_addr %5 : $__ContiguousArrayStorageBase, $Any // user: %20
+  %13 = integer_literal $Builtin.Int64, 7954890096655626051 // user: %14
+  %14 = struct $UInt64 (%13 : $Builtin.Int64)     // user: %17
+  %15 = integer_literal $Builtin.Int64, -1296914168420473501 // user: %16
+  %16 = value_to_bridge_object %15 : $Builtin.Int64 // user: %17
+  %17 = struct $_StringObject (%14 : $UInt64, %16 : $Builtin.BridgeObject) // user: %18
+  %18 = struct $_StringGuts (%17 : $_StringObject) // user: %19
+  %19 = struct $String (%18 : $_StringGuts)       // user: %21
+  %20 = init_existential_addr %12 : $*Any, $String // user: %21
+  store %19 to %20 : $*String                     // id: %21
+  %22 = end_cow_mutation %4 : $_ContiguousArrayStorage<Any> // users: %41, %23
+  %23 = unchecked_ref_cast %22 : $_ContiguousArrayStorage<Any> to $Builtin.BridgeObject // user: %24
+  %24 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%23 : $Builtin.BridgeObject) // user: %25
+  %25 = struct $_ArrayBuffer<Any> (%24 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %26
+  %26 = struct $Array<Any> (%25 : $_ArrayBuffer<Any>) // user: %40
+  %27 = integer_literal $Builtin.Int64, 32        // user: %28
+  %28 = struct $UInt64 (%27 : $Builtin.Int64)     // user: %31
+  %29 = integer_literal $Builtin.Int64, -2233785415175766016 // user: %30
+  %30 = value_to_bridge_object %29 : $Builtin.Int64 // users: %36, %31
+  %31 = struct $_StringObject (%28 : $UInt64, %30 : $Builtin.BridgeObject) // user: %32
+  %32 = struct $_StringGuts (%31 : $_StringObject) // user: %33
+  %33 = struct $String (%32 : $_StringGuts)       // user: %40
+  %34 = integer_literal $Builtin.Int64, 10        // user: %35
+  %35 = struct $UInt64 (%34 : $Builtin.Int64)     // user: %36
+  %36 = struct $_StringObject (%35 : $UInt64, %30 : $Builtin.BridgeObject) // user: %37
+  %37 = struct $_StringGuts (%36 : $_StringObject) // user: %38
+  %38 = struct $String (%37 : $_StringGuts)       // user: %40
+  // function_ref print(_:separator:terminator:)
+  %39 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %40
+  %40 = apply %39(%26, %33, %38) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  strong_release %22 : $_ContiguousArrayStorage<Any> // id: %41
+  %42 = tuple ()                                  // user: %43
+  return %42 : $()                                // id: %43
+} // end sil function '$s4main10ConferencePAAE3gooyyF'
+
+// SwiftHeroes.foo()
+sil hidden [signature_optimized_thunk] [always_inline] @$s4main11SwiftHeroesV3fooyyF : $@convention(method) (SwiftHeroes) -> () {
+[global: read,write,copy,destroy,allocate,deinit_barrier]
+// %0 "self"
+bb0(%0 : $SwiftHeroes):
+  %1 = integer_literal $Builtin.Word, 1           // user: %4
+  %2 = integer_literal $Builtin.Int64, 1          // user: %3
+  %3 = struct $Int (%2 : $Builtin.Int64)          // user: %8
+  %4 = alloc_ref [tail_elems $Any * %1 : $Builtin.Word] $_ContiguousArrayStorage<Any> // users: %22, %5
+  %5 = upcast %4 : $_ContiguousArrayStorage<Any> to $__ContiguousArrayStorageBase // users: %12, %10
+  %6 = integer_literal $Builtin.Int64, 2          // user: %7
+  %7 = struct $UInt (%6 : $Builtin.Int64)         // user: %8
+  %8 = struct $_SwiftArrayBodyStorage (%3 : $Int, %7 : $UInt) // user: %9
+  %9 = struct $_ArrayBody (%8 : $_SwiftArrayBodyStorage) // user: %11
+  %10 = ref_element_addr %5 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %11
+  store %9 to %10 : $*_ArrayBody                  // id: %11
+  %12 = ref_tail_addr %5 : $__ContiguousArrayStorageBase, $Any // user: %20
+  %13 = integer_literal $Builtin.Int64, 8243074357743155027 // user: %14
+  %14 = struct $UInt64 (%13 : $Builtin.Int64)     // user: %17
+  %15 = integer_literal $Builtin.Int64, -1193612891808111249 // user: %16
+  %16 = value_to_bridge_object %15 : $Builtin.Int64 // user: %17
+  %17 = struct $_StringObject (%14 : $UInt64, %16 : $Builtin.BridgeObject) // user: %18
+  %18 = struct $_StringGuts (%17 : $_StringObject) // user: %19
+  %19 = struct $String (%18 : $_StringGuts)       // user: %21
+  %20 = init_existential_addr %12 : $*Any, $String // user: %21
+  store %19 to %20 : $*String                     // id: %21
+  %22 = end_cow_mutation %4 : $_ContiguousArrayStorage<Any> // users: %41, %23
+  %23 = unchecked_ref_cast %22 : $_ContiguousArrayStorage<Any> to $Builtin.BridgeObject // user: %24
+  %24 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%23 : $Builtin.BridgeObject) // user: %25
+  %25 = struct $_ArrayBuffer<Any> (%24 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %26
+  %26 = struct $Array<Any> (%25 : $_ArrayBuffer<Any>) // user: %40
+  %27 = integer_literal $Builtin.Int64, 32        // user: %28
+  %28 = struct $UInt64 (%27 : $Builtin.Int64)     // user: %31
+  %29 = integer_literal $Builtin.Int64, -2233785415175766016 // user: %30
+  %30 = value_to_bridge_object %29 : $Builtin.Int64 // users: %36, %31
+  %31 = struct $_StringObject (%28 : $UInt64, %30 : $Builtin.BridgeObject) // user: %32
+  %32 = struct $_StringGuts (%31 : $_StringObject) // user: %33
+  %33 = struct $String (%32 : $_StringGuts)       // user: %40
+  %34 = integer_literal $Builtin.Int64, 10        // user: %35
+  %35 = struct $UInt64 (%34 : $Builtin.Int64)     // user: %36
+  %36 = struct $_StringObject (%35 : $UInt64, %30 : $Builtin.BridgeObject) // user: %37
+  %37 = struct $_StringGuts (%36 : $_StringObject) // user: %38
+  %38 = struct $String (%37 : $_StringGuts)       // user: %40
+  // function_ref print(_:separator:terminator:)
+  %39 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %40
+  %40 = apply %39(%26, %33, %38) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  strong_release %22 : $_ContiguousArrayStorage<Any> // id: %41
+  %42 = tuple ()                                  // user: %43
+  return %42 : $()                                // id: %43
+} // end sil function '$s4main11SwiftHeroesV3fooyyF'
+
+// SwiftHeroes.goo()
+sil hidden @$s4main11SwiftHeroesV3gooyyF : $@convention(method) (SwiftHeroes) -> () {
+[global: read,write,copy,destroy,allocate,deinit_barrier]
+// %0 "self"                                      // user: %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  %2 = integer_literal $Builtin.Word, 1           // user: %5
+  %3 = integer_literal $Builtin.Int64, 1          // user: %4
+  %4 = struct $Int (%3 : $Builtin.Int64)          // user: %9
+  %5 = alloc_ref [tail_elems $Any * %2 : $Builtin.Word] $_ContiguousArrayStorage<Any> // users: %23, %6
+  %6 = upcast %5 : $_ContiguousArrayStorage<Any> to $__ContiguousArrayStorageBase // users: %13, %11
+  %7 = integer_literal $Builtin.Int64, 2          // user: %8
+  %8 = struct $UInt (%7 : $Builtin.Int64)         // user: %9
+  %9 = struct $_SwiftArrayBodyStorage (%4 : $Int, %8 : $UInt) // user: %10
+  %10 = struct $_ArrayBody (%9 : $_SwiftArrayBodyStorage) // user: %12
+  %11 = ref_element_addr %6 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %12
+  store %10 to %11 : $*_ArrayBody                 // id: %12
+  %13 = ref_tail_addr %6 : $__ContiguousArrayStorageBase, $Any // user: %21
+  %14 = integer_literal $Builtin.Int64, 8243074357743155027 // user: %15
+  %15 = struct $UInt64 (%14 : $Builtin.Int64)     // user: %18
+  %16 = integer_literal $Builtin.Int64, -1193612887513143953 // user: %17
+  %17 = value_to_bridge_object %16 : $Builtin.Int64 // user: %18
+  %18 = struct $_StringObject (%15 : $UInt64, %17 : $Builtin.BridgeObject) // user: %19
+  %19 = struct $_StringGuts (%18 : $_StringObject) // user: %20
+  %20 = struct $String (%19 : $_StringGuts)       // user: %22
+  %21 = init_existential_addr %13 : $*Any, $String // user: %22
+  store %20 to %21 : $*String                     // id: %22
+  %23 = end_cow_mutation %5 : $_ContiguousArrayStorage<Any> // users: %42, %24
+  %24 = unchecked_ref_cast %23 : $_ContiguousArrayStorage<Any> to $Builtin.BridgeObject // user: %25
+  %25 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%24 : $Builtin.BridgeObject) // user: %26
+  %26 = struct $_ArrayBuffer<Any> (%25 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %27
+  %27 = struct $Array<Any> (%26 : $_ArrayBuffer<Any>) // user: %41
+  %28 = integer_literal $Builtin.Int64, 32        // user: %29
+  %29 = struct $UInt64 (%28 : $Builtin.Int64)     // user: %32
+  %30 = integer_literal $Builtin.Int64, -2233785415175766016 // user: %31
+  %31 = value_to_bridge_object %30 : $Builtin.Int64 // users: %37, %32
+  %32 = struct $_StringObject (%29 : $UInt64, %31 : $Builtin.BridgeObject) // user: %33
+  %33 = struct $_StringGuts (%32 : $_StringObject) // user: %34
+  %34 = struct $String (%33 : $_StringGuts)       // user: %41
+  %35 = integer_literal $Builtin.Int64, 10        // user: %36
+  %36 = struct $UInt64 (%35 : $Builtin.Int64)     // user: %37
+  %37 = struct $_StringObject (%36 : $UInt64, %31 : $Builtin.BridgeObject) // user: %38
+  %38 = struct $_StringGuts (%37 : $_StringObject) // user: %39
+  %39 = struct $String (%38 : $_StringGuts)       // user: %41
+  // function_ref print(_:separator:terminator:)
+  %40 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %41
+  %41 = apply %40(%27, %34, %39) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  strong_release %23 : $_ContiguousArrayStorage<Any> // id: %42
+  %43 = tuple ()                                  // user: %44
+  return %43 : $()                                // id: %44
+} // end sil function '$s4main11SwiftHeroesV3gooyyF'
+
+// SwiftHeroes.init()
+sil hidden @$s4main11SwiftHeroesVACycfC : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes {
+[global: ]
+// %0 "$metatype"
+bb0(%0 : $@thin SwiftHeroes.Type):
+  %1 = struct $SwiftHeroes ()                     // user: %2
+  return %1 : $SwiftHeroes                        // id: %2
+} // end sil function '$s4main11SwiftHeroesVACycfC'
+
+// protocol witness for Conference.foo() in conformance SwiftHeroes
+sil private [transparent] [thunk] @$s4main11SwiftHeroesVAA10ConferenceA2aDP3fooyyFTW : $@convention(witness_method: Conference) (@in_guaranteed SwiftHeroes) -> () {
+[global: read,write,copy,destroy,allocate,deinit_barrier]
+bb0(%0 : $*SwiftHeroes):
+  %1 = integer_literal $Builtin.Word, 1           // user: %4
+  %2 = integer_literal $Builtin.Int64, 1          // user: %3
+  %3 = struct $Int (%2 : $Builtin.Int64)          // user: %8
+  %4 = alloc_ref [tail_elems $Any * %1 : $Builtin.Word] $_ContiguousArrayStorage<Any> // users: %22, %5
+  %5 = upcast %4 : $_ContiguousArrayStorage<Any> to $__ContiguousArrayStorageBase // users: %12, %10
+  %6 = integer_literal $Builtin.Int64, 2          // user: %7
+  %7 = struct $UInt (%6 : $Builtin.Int64)         // user: %8
+  %8 = struct $_SwiftArrayBodyStorage (%3 : $Int, %7 : $UInt) // user: %9
+  %9 = struct $_ArrayBody (%8 : $_SwiftArrayBodyStorage) // user: %11
+  %10 = ref_element_addr %5 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %11
+  store %9 to %10 : $*_ArrayBody                  // id: %11
+  %12 = ref_tail_addr %5 : $__ContiguousArrayStorageBase, $Any // user: %20
+  %13 = integer_literal $Builtin.Int64, 8243074357743155027 // user: %14
+  %14 = struct $UInt64 (%13 : $Builtin.Int64)     // user: %17
+  %15 = integer_literal $Builtin.Int64, -1193612891808111249 // user: %16
+  %16 = value_to_bridge_object %15 : $Builtin.Int64 // user: %17
+  %17 = struct $_StringObject (%14 : $UInt64, %16 : $Builtin.BridgeObject) // user: %18
+  %18 = struct $_StringGuts (%17 : $_StringObject) // user: %19
+  %19 = struct $String (%18 : $_StringGuts)       // user: %21
+  %20 = init_existential_addr %12 : $*Any, $String // user: %21
+  store %19 to %20 : $*String                     // id: %21
+  %22 = end_cow_mutation %4 : $_ContiguousArrayStorage<Any> // users: %41, %23
+  %23 = unchecked_ref_cast %22 : $_ContiguousArrayStorage<Any> to $Builtin.BridgeObject // user: %24
+  %24 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%23 : $Builtin.BridgeObject) // user: %25
+  %25 = struct $_ArrayBuffer<Any> (%24 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %26
+  %26 = struct $Array<Any> (%25 : $_ArrayBuffer<Any>) // user: %40
+  %27 = integer_literal $Builtin.Int64, 32        // user: %28
+  %28 = struct $UInt64 (%27 : $Builtin.Int64)     // user: %31
+  %29 = integer_literal $Builtin.Int64, -2233785415175766016 // user: %30
+  %30 = value_to_bridge_object %29 : $Builtin.Int64 // users: %36, %31
+  %31 = struct $_StringObject (%28 : $UInt64, %30 : $Builtin.BridgeObject) // user: %32
+  %32 = struct $_StringGuts (%31 : $_StringObject) // user: %33
+  %33 = struct $String (%32 : $_StringGuts)       // user: %40
+  %34 = integer_literal $Builtin.Int64, 10        // user: %35
+  %35 = struct $UInt64 (%34 : $Builtin.Int64)     // user: %36
+  %36 = struct $_StringObject (%35 : $UInt64, %30 : $Builtin.BridgeObject) // user: %37
+  %37 = struct $_StringGuts (%36 : $_StringObject) // user: %38
+  %38 = struct $String (%37 : $_StringGuts)       // user: %40
+  // function_ref print(_:separator:terminator:)
+  %39 = function_ref @$ss5print_9separator10terminatoryypd_S2StF : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> () // user: %40
+  %40 = apply %39(%26, %33, %38) : $@convention(thin) (@guaranteed Array<Any>, @guaranteed String, @guaranteed String) -> ()
+  strong_release %22 : $_ContiguousArrayStorage<Any> // id: %41
+  %42 = tuple ()                                  // user: %43
+  return %42 : $()                                // id: %43
+} // end sil function '$s4main11SwiftHeroesVAA10ConferenceA2aDP3fooyyFTW'
+
+// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
+sil public_external [exact_self_class] @$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC : $@convention(method) (@thick __SwiftNativeNSArrayWithContiguousStorage.Type) -> @owned __SwiftNativeNSArrayWithContiguousStorage {
+bb0(%0 : $@thick __SwiftNativeNSArrayWithContiguousStorage.Type):
+  %1 = alloc_ref $__SwiftNativeNSArrayWithContiguousStorage // user: %2
+  return %1 : $__SwiftNativeNSArrayWithContiguousStorage // id: %2
+} // end sil function '$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC'
+
+// _ContiguousArrayStorage.__allocating_init(_doNotCallMeBase:)
+sil public_external [exact_self_class] @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfC : $@convention(method) <Element> (@thick _ContiguousArrayStorage<Element>.Type) -> @owned _ContiguousArrayStorage<Element> {
+bb0(%0 : $@thick _ContiguousArrayStorage<Element>.Type):
+  %1 = alloc_ref $_ContiguousArrayStorage<Element> // user: %3
+  // function_ref _ContiguousArrayStorage.init(_doNotCallMeBase:)
+  %2 = function_ref @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfc : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0> // user: %3
+  %3 = apply %2<Element>(%1) : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0> // user: %4
+  return %3 : $_ContiguousArrayStorage<Element>   // id: %4
+} // end sil function '$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfC'
+
+// _ContiguousArrayStorage.canStoreElements(ofDynamicType:)
+sil public_external @$ss23_ContiguousArrayStorageC16canStoreElements13ofDynamicTypeSbypXp_tF : $@convention(method) <Element> (@thick any Any.Type, @guaranteed _ContiguousArrayStorage<Element>) -> Bool {
+[%1: noescape **]
+// %0                                             // user: %2
+bb0(%0 : $@thick any Any.Type, %1 : $_ContiguousArrayStorage<Element>):
+  checked_cast_br %0 : $@thick any Any.Type to Element.Type, bb2, bb1 // id: %2
+
+bb1:                                              // Preds: bb0
+  %3 = integer_literal $Builtin.Int1, 0           // user: %4
+  br bb3(%3 : $Builtin.Int1)                      // id: %4
+
+bb2(%5 : $@thick Element.Type):                   // Preds: bb0
+  %6 = integer_literal $Builtin.Int1, -1          // user: %7
+  br bb3(%6 : $Builtin.Int1)                      // id: %7
+
+// %8                                             // user: %9
+bb3(%8 : $Builtin.Int1):                          // Preds: bb2 bb1
+  %9 = struct $Bool (%8 : $Builtin.Int1)          // user: %10
+  return %9 : $Bool                               // id: %10
+} // end sil function '$ss23_ContiguousArrayStorageC16canStoreElements13ofDynamicTypeSbypXp_tF'
+
+// _ContiguousArrayStorage.staticElementType.getter
+sil public_external @$ss23_ContiguousArrayStorageC17staticElementTypeypXpvg : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> @thick any Any.Type {
+[%0: noescape **]
+bb0(%0 : $_ContiguousArrayStorage<Element>):
+  %1 = metatype $@thick Element.Type              // user: %2
+  %2 = init_existential_metatype %1 : $@thick Element.Type, $@thick any Any.Type // user: %3
+  return %2 : $@thick any Any.Type                // id: %3
+} // end sil function '$ss23_ContiguousArrayStorageC17staticElementTypeypXpvg'
+
+// _ContiguousArrayStorage.__deallocating_deinit
+sil public_external @$ss23_ContiguousArrayStorageCfD : $@convention(method) <Element> (@owned _ContiguousArrayStorage<Element>) -> () {
+[%0: noescape, noescape c*.v**]
+// %0                                             // user: %2
+bb0(%0 : $_ContiguousArrayStorage<Element>):
+  // function_ref _ContiguousArrayStorage.deinit
+  %1 = function_ref @$ss23_ContiguousArrayStorageCfd : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> @owned Builtin.NativeObject // user: %2
+  %2 = apply %1<Element>(%0) : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> @owned Builtin.NativeObject // user: %3
+  %3 = unchecked_ref_cast %2 : $Builtin.NativeObject to $_ContiguousArrayStorage<Element> // user: %4
+  dealloc_ref %3 : $_ContiguousArrayStorage<Element> // id: %4
+  %5 = tuple ()                                   // user: %6
+  return %5 : $()                                 // id: %6
+} // end sil function '$ss23_ContiguousArrayStorageCfD'
+
+// _ContiguousArrayStorage.init(_doNotCallMeBase:)
+sil @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfc : $@convention(method) <τ_0_0> (@owned _ContiguousArrayStorage<τ_0_0>) -> @owned _ContiguousArrayStorage<τ_0_0>
+
+// _ContiguousArrayStorage.deinit
+sil public_external @$ss23_ContiguousArrayStorageCfd : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> @owned Builtin.NativeObject {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+// %0                                             // users: %14, %13, %3, %2
+bb0(%0 : $_ContiguousArrayStorage<Element>):
+  // function_ref _ContiguousArrayStorage._elementPointer.getter
+  %1 = function_ref @$ss23_ContiguousArrayStorageC15_elementPointerSpyxGvg : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> UnsafeMutablePointer<τ_0_0> // user: %2
+  %2 = apply %1<Element>(%0) : $@convention(method) <τ_0_0> (@guaranteed _ContiguousArrayStorage<τ_0_0>) -> UnsafeMutablePointer<τ_0_0> // user: %12
+  %3 = upcast %0 : $_ContiguousArrayStorage<Element> to $__ContiguousArrayStorageBase // user: %4
+  %4 = ref_element_addr %3 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %5
+  %5 = struct_element_addr %4 : $*_ArrayBody, #_ArrayBody._storage // user: %6
+  %6 = struct_element_addr %5 : $*_SwiftArrayBodyStorage, #_SwiftArrayBodyStorage.count // user: %7
+  %7 = struct_element_addr %6 : $*Int, #Int._value // user: %8
+  %8 = load %7 : $*Builtin.Int64                  // user: %9
+  %9 = builtin "assumeNonNegative_Int64"(%8 : $Builtin.Int64) : $Builtin.Int64 // user: %10
+  %10 = struct $Int (%9 : $Builtin.Int64)         // user: %12
+  // function_ref UnsafeMutablePointer.deinitialize(count:)
+  %11 = function_ref @$sSp12deinitialize5countSvSi_tF : $@convention(method) <τ_0_0> (Int, UnsafeMutablePointer<τ_0_0>) -> UnsafeMutableRawPointer // user: %12
+  %12 = apply %11<Element>(%10, %2) : $@convention(method) <τ_0_0> (Int, UnsafeMutablePointer<τ_0_0>) -> UnsafeMutableRawPointer
+  fix_lifetime %0 : $_ContiguousArrayStorage<Element> // id: %13
+  %14 = unchecked_ref_cast %0 : $_ContiguousArrayStorage<Element> to $Builtin.NativeObject // user: %15
+  return %14 : $Builtin.NativeObject              // id: %15
+} // end sil function '$ss23_ContiguousArrayStorageCfd'
+
+// _ContiguousArrayStorage._elementPointer.getter
+sil public_external @$ss23_ContiguousArrayStorageC15_elementPointerSpyxGvg : $@convention(method) <Element> (@guaranteed _ContiguousArrayStorage<Element>) -> UnsafeMutablePointer<Element> {
+[%0: noescape, escape c*.v** => %r.s0.v**]
+// %0                                             // user: %1
+bb0(%0 : $_ContiguousArrayStorage<Element>):
+  %1 = ref_tail_addr %0 : $_ContiguousArrayStorage<Element>, $Element // user: %2
+  %2 = address_to_pointer %1 : $*Element to $Builtin.RawPointer // user: %3
+  %3 = struct $UnsafeMutablePointer<Element> (%2 : $Builtin.RawPointer) // user: %4
+  return %3 : $UnsafeMutablePointer<Element>      // id: %4
+} // end sil function '$ss23_ContiguousArrayStorageC15_elementPointerSpyxGvg'
+
+// UnsafeMutablePointer.deinitialize(count:)
+sil public_external @$sSp12deinitialize5countSvSi_tF : $@convention(method) <Pointee> (Int, UnsafeMutablePointer<Pointee>) -> UnsafeMutableRawPointer {
+[%1: escape v** => %r.s0.v**]
+// %0                                             // user: %4
+// %1                                             // user: %3
+bb0(%0 : $Int, %1 : $UnsafeMutablePointer<Pointee>):
+  %2 = metatype $@thick Pointee.Type              // user: %6
+  %3 = struct_extract %1 : $UnsafeMutablePointer<Pointee>, #UnsafeMutablePointer._rawValue // users: %7, %6
+  %4 = struct_extract %0 : $Int, #Int._value      // user: %5
+  %5 = builtin "truncOrBitCast_Int64_Word"(%4 : $Builtin.Int64) : $Builtin.Word // user: %6
+  %6 = builtin "destroyArray"<Pointee>(%2 : $@thick Pointee.Type, %3 : $Builtin.RawPointer, %5 : $Builtin.Word) : $()
+  %7 = struct $UnsafeMutableRawPointer (%3 : $Builtin.RawPointer) // user: %8
+  return %7 : $UnsafeMutableRawPointer            // id: %8
+} // end sil function '$sSp12deinitialize5countSvSi_tF'
+
+// __SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit
+sil public_external @$ss41__SwiftNativeNSArrayWithContiguousStorageCfD : $@convention(method) (@owned __SwiftNativeNSArrayWithContiguousStorage) -> () {
+[%0: noescape **]
+// %0                                             // user: %1
+bb0(%0 : $__SwiftNativeNSArrayWithContiguousStorage):
+  dealloc_ref %0 : $__SwiftNativeNSArrayWithContiguousStorage // id: %1
+  %2 = tuple ()                                   // user: %3
+  return %2 : $()                                 // id: %3
+} // end sil function '$ss41__SwiftNativeNSArrayWithContiguousStorageCfD'
+
+sil_vtable _ContiguousArrayStorage {
+  #__SwiftNativeNSArray.init!allocator: (__SwiftNativeNSArray.Type) -> () -> __SwiftNativeNSArray : @$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC [inherited]	// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
+  #__ContiguousArrayStorageBase.init!allocator: (__ContiguousArrayStorageBase.Type) -> (()) -> __ContiguousArrayStorageBase : @$ss23_ContiguousArrayStorageC16_doNotCallMeBaseAByxGyt_tcfC [override]	// _ContiguousArrayStorage.__allocating_init(_doNotCallMeBase:)
+  #__ContiguousArrayStorageBase.canStoreElements: (__ContiguousArrayStorageBase) -> (any Any.Type) -> Bool : @$ss23_ContiguousArrayStorageC16canStoreElements13ofDynamicTypeSbypXp_tF [override]	// _ContiguousArrayStorage.canStoreElements(ofDynamicType:)
+  #__ContiguousArrayStorageBase.staticElementType!getter: (__ContiguousArrayStorageBase) -> () -> any Any.Type : @$ss23_ContiguousArrayStorageC17staticElementTypeypXpvg [override]	// _ContiguousArrayStorage.staticElementType.getter
+  #_ContiguousArrayStorage.deinit!deallocator: @$ss23_ContiguousArrayStorageCfD	// _ContiguousArrayStorage.__deallocating_deinit
+}
+
+sil_vtable __SwiftNativeNSArrayWithContiguousStorage {
+  #__SwiftNativeNSArray.init!allocator: (__SwiftNativeNSArray.Type) -> () -> __SwiftNativeNSArray : @$ss41__SwiftNativeNSArrayWithContiguousStorageCABycfC [override]	// __SwiftNativeNSArrayWithContiguousStorage.__allocating_init()
+  #__SwiftNativeNSArrayWithContiguousStorage.deinit!deallocator: @$ss41__SwiftNativeNSArrayWithContiguousStorageCfD	// __SwiftNativeNSArrayWithContiguousStorage.__deallocating_deinit
+}
+
+sil_witness_table hidden SwiftHeroes: Conference module main {
+  method #Conference.foo: <Self where Self : Conference> (Self) -> () -> () : @$s4main11SwiftHeroesVAA10ConferenceA2aDP3fooyyFTW	// protocol witness for Conference.foo() in conformance SwiftHeroes
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/protocol-extension.swift' => 'src/protocol-extension.swift'
+
+

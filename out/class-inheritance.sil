@@ -1,0 +1,132 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+class Father {
+  @objc deinit
+  init()
+}
+
+@_inheritsConvenienceInitializers class Son : Father {
+  override init()
+  @objc deinit
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+[%1: noescape **]
+[global: ]
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// Father.deinit
+sil hidden @$s4main6FatherCfd : $@convention(method) (@guaranteed Father) -> @owned Builtin.NativeObject {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+[global: ]
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $Father):
+  debug_value %0 : $Father, let, name "self", argno 1, implicit // id: %1
+  %2 = unchecked_ref_cast %0 : $Father to $Builtin.NativeObject // user: %3
+  return %2 : $Builtin.NativeObject               // id: %3
+} // end sil function '$s4main6FatherCfd'
+
+// Father.__deallocating_deinit
+sil hidden @$s4main6FatherCfD : $@convention(method) (@owned Father) -> () {
+[%0: noescape **, read c*.v**, write c*.v**, copy c*.v**]
+[global: read,write,copy]
+// %0 "self"                                      // users: %3, %2, %1
+bb0(%0 : $Father):
+  debug_value %0 : $Father, let, name "self", argno 1, implicit // id: %1
+  debug_value %0 : $Father, let, name "self", argno 1, implicit // id: %2
+  dealloc_ref %0 : $Father                        // id: %3
+  %4 = tuple ()                                   // user: %5
+  return %4 : $()                                 // id: %5
+} // end sil function '$s4main6FatherCfD'
+
+// Father.__allocating_init()
+sil hidden [exact_self_class] @$s4main6FatherCACycfC : $@convention(method) (@thick Father.Type) -> @owned Father {
+[global: allocate]
+// %0 "$metatype"
+bb0(%0 : $@thick Father.Type):
+  %1 = alloc_ref $Father                          // users: %3, %2
+  debug_value %1 : $Father, let, name "self", argno 1, implicit // id: %2
+  return %1 : $Father                             // id: %3
+} // end sil function '$s4main6FatherCACycfC'
+
+// Father.init()
+sil hidden @$s4main6FatherCACycfc : $@convention(method) (@owned Father) -> @owned Father {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+[global: ]
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $Father):
+  debug_value %0 : $Father, let, name "self", argno 1, implicit // id: %1
+  return %0 : $Father                             // id: %2
+} // end sil function '$s4main6FatherCACycfc'
+
+// Son.__allocating_init()
+sil hidden [exact_self_class] @$s4main3SonCACycfC : $@convention(method) (@thick Son.Type) -> @owned Son {
+[global: allocate]
+// %0 "$metatype"
+bb0(%0 : $@thick Son.Type):
+  %1 = alloc_ref $Son                             // users: %4, %3, %2
+  debug_value %1 : $Son, let, name "self", implicit // id: %2
+  debug_value %1 : $Son, let, name "self", implicit // id: %3
+  return %1 : $Son                                // id: %4
+} // end sil function '$s4main3SonCACycfC'
+
+// Son.init()
+sil hidden @$s4main3SonCACycfc : $@convention(method) (@owned Son) -> @owned Son {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+[global: ]
+// %0 "self"                                      // users: %3, %2, %1
+bb0(%0 : $Son):
+  debug_value %0 : $Son, let, name "self", implicit // id: %1
+  debug_value %0 : $Son, let, name "self", implicit // id: %2
+  return %0 : $Son                                // id: %3
+} // end sil function '$s4main3SonCACycfc'
+
+// Son.deinit
+sil hidden @$s4main3SonCfd : $@convention(method) (@guaranteed Son) -> @owned Builtin.NativeObject {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+[global: ]
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $Son):
+  debug_value %0 : $Son, let, name "self", argno 1, implicit // id: %1
+  %2 = unchecked_ref_cast %0 : $Son to $Builtin.NativeObject // user: %3
+  return %2 : $Builtin.NativeObject               // id: %3
+} // end sil function '$s4main3SonCfd'
+
+// Son.__deallocating_deinit
+sil hidden @$s4main3SonCfD : $@convention(method) (@owned Son) -> () {
+[%0: noescape **, read c*.v**, write c*.v**, copy c*.v**]
+[global: read,write,copy]
+// %0 "self"                                      // users: %3, %2, %1
+bb0(%0 : $Son):
+  debug_value %0 : $Son, let, name "self", argno 1, implicit // id: %1
+  debug_value %0 : $Son, let, name "self", argno 1, implicit // id: %2
+  dealloc_ref %0 : $Son                           // id: %3
+  %4 = tuple ()                                   // user: %5
+  return %4 : $()                                 // id: %5
+} // end sil function '$s4main3SonCfD'
+
+sil_vtable Father {
+  #Father.init!allocator: (Father.Type) -> () -> Father : @$s4main6FatherCACycfC	// Father.__allocating_init()
+  #Father.deinit!deallocator: @$s4main6FatherCfD	// Father.__deallocating_deinit
+}
+
+sil_vtable Son {
+  #Father.init!allocator: (Father.Type) -> () -> Father : @$s4main3SonCACycfC [override]	// Son.__allocating_init()
+  #Son.deinit!deallocator: @$s4main3SonCfD	// Son.__deallocating_deinit
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/class-inheritance.swift' => 'src/class-inheritance.swift'
+
+

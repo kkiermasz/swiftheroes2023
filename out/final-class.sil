@@ -1,0 +1,88 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+final class SwiftHeroes {
+  final func organise()
+  @objc deinit
+  init()
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+[%1: noescape **]
+[global: ]
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// SwiftHeroes.organise()
+sil hidden @$s4main11SwiftHeroesC8organiseyyF : $@convention(method) (@guaranteed SwiftHeroes) -> () {
+[%0: noescape **]
+[global: ]
+// %0 "self"                                      // user: %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  %2 = tuple ()                                   // user: %3
+  return %2 : $()                                 // id: %3
+} // end sil function '$s4main11SwiftHeroesC8organiseyyF'
+
+// SwiftHeroes.deinit
+sil hidden @$s4main11SwiftHeroesCfd : $@convention(method) (@guaranteed SwiftHeroes) -> @owned Builtin.NativeObject {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+[global: ]
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  %2 = unchecked_ref_cast %0 : $SwiftHeroes to $Builtin.NativeObject // user: %3
+  return %2 : $Builtin.NativeObject               // id: %3
+} // end sil function '$s4main11SwiftHeroesCfd'
+
+// SwiftHeroes.__deallocating_deinit
+sil hidden @$s4main11SwiftHeroesCfD : $@convention(method) (@owned SwiftHeroes) -> () {
+[%0: noescape **, read c*.v**, write c*.v**, copy c*.v**]
+[global: read,write,copy]
+// %0 "self"                                      // users: %3, %2, %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %2
+  dealloc_ref %0 : $SwiftHeroes                   // id: %3
+  %4 = tuple ()                                   // user: %5
+  return %4 : $()                                 // id: %5
+} // end sil function '$s4main11SwiftHeroesCfD'
+
+// SwiftHeroes.__allocating_init()
+sil hidden [exact_self_class] @$s4main11SwiftHeroesCACycfC : $@convention(method) (@thick SwiftHeroes.Type) -> @owned SwiftHeroes {
+[global: allocate]
+// %0 "$metatype"
+bb0(%0 : $@thick SwiftHeroes.Type):
+  %1 = alloc_ref $SwiftHeroes                     // users: %3, %2
+  debug_value %1 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %2
+  return %1 : $SwiftHeroes                        // id: %3
+} // end sil function '$s4main11SwiftHeroesCACycfC'
+
+// SwiftHeroes.init()
+sil hidden @$s4main11SwiftHeroesCACycfc : $@convention(method) (@owned SwiftHeroes) -> @owned SwiftHeroes {
+[%0: escape => %r, escape c*.v** => %r.c*.v**]
+[global: ]
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $SwiftHeroes):
+  debug_value %0 : $SwiftHeroes, let, name "self", argno 1, implicit // id: %1
+  return %0 : $SwiftHeroes                        // id: %2
+} // end sil function '$s4main11SwiftHeroesCACycfc'
+
+sil_vtable SwiftHeroes {
+  #SwiftHeroes.init!allocator: (SwiftHeroes.Type) -> () -> SwiftHeroes : @$s4main11SwiftHeroesCACycfC	// SwiftHeroes.__allocating_init()
+  #SwiftHeroes.deinit!deallocator: @$s4main11SwiftHeroesCfD	// SwiftHeroes.__deallocating_deinit
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/final-class.swift' => 'src/final-class.swift'
+
+
