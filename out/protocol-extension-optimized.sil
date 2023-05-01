@@ -34,9 +34,9 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
   %4 = struct $SwiftHeroes ()                     // user: %6
   %5 = init_existential_addr %3 : $*any Conference, $SwiftHeroes // user: %6
   store %4 to %5 : $*SwiftHeroes                  // id: %6
-  %7 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("A319525E-E72F-11ED-A012-96B3AA0BE17C", any Conference) Self // users: %9, %9, %8
-  %8 = witness_method $@opened("A319525E-E72F-11ED-A012-96B3AA0BE17C", any Conference) Self, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %7 : $*@opened("A319525E-E72F-11ED-A012-96B3AA0BE17C", any Conference) Self : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7; user: %9
-  %9 = apply %8<@opened("A319525E-E72F-11ED-A012-96B3AA0BE17C", any Conference) Self>(%7) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7
+  %7 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("F39CF15E-E838-11ED-AF87-96B3AA0BE17C", any Conference) Self // users: %9, %9, %8
+  %8 = witness_method $@opened("F39CF15E-E838-11ED-AF87-96B3AA0BE17C", any Conference) Self, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %7 : $*@opened("F39CF15E-E838-11ED-AF87-96B3AA0BE17C", any Conference) Self : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7; user: %9
+  %9 = apply %8<@opened("F39CF15E-E838-11ED-AF87-96B3AA0BE17C", any Conference) Self>(%7) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7
   %10 = integer_literal $Builtin.Word, 1          // user: %13
   %11 = integer_literal $Builtin.Int64, 1         // user: %12
   %12 = struct $Int (%11 : $Builtin.Int64)        // user: %17

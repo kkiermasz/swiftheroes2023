@@ -35,13 +35,13 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
   %6 = apply %5(%4) : $@convention(method) (@thin SwiftHeroes.Type) -> SwiftHeroes // user: %8
   %7 = init_existential_addr %3 : $*any Conference, $SwiftHeroes // user: %8
   store %6 to %7 : $*SwiftHeroes                  // id: %8
-  %9 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("A3387FC6-E72F-11ED-9AD5-96B3AA0BE17C", any Conference) Self // users: %11, %11, %10
-  %10 = witness_method $@opened("A3387FC6-E72F-11ED-9AD5-96B3AA0BE17C", any Conference) Self, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %9 : $*@opened("A3387FC6-E72F-11ED-9AD5-96B3AA0BE17C", any Conference) Self : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %9; user: %11
-  %11 = apply %10<@opened("A3387FC6-E72F-11ED-9AD5-96B3AA0BE17C", any Conference) Self>(%9) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %9
-  %12 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("A33883AE-E72F-11ED-9AD5-96B3AA0BE17C", any Conference) Self // users: %14, %14
+  %9 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("F3B8E292-E838-11ED-B305-96B3AA0BE17C", any Conference) Self // users: %11, %11, %10
+  %10 = witness_method $@opened("F3B8E292-E838-11ED-B305-96B3AA0BE17C", any Conference) Self, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %9 : $*@opened("F3B8E292-E838-11ED-B305-96B3AA0BE17C", any Conference) Self : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %9; user: %11
+  %11 = apply %10<@opened("F3B8E292-E838-11ED-B305-96B3AA0BE17C", any Conference) Self>(%9) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %9
+  %12 = open_existential_addr immutable_access %3 : $*any Conference to $*@opened("F3B8E63E-E838-11ED-B305-96B3AA0BE17C", any Conference) Self // users: %14, %14
   // function_ref Conference.goo()
   %13 = function_ref @(extension in main):main.Conference.goo() -> () : $@convention(method) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // user: %14
-  %14 = apply %13<@opened("A33883AE-E72F-11ED-9AD5-96B3AA0BE17C", any Conference) Self>(%12) : $@convention(method) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %12
+  %14 = apply %13<@opened("F3B8E63E-E838-11ED-B305-96B3AA0BE17C", any Conference) Self>(%12) : $@convention(method) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %12
   %15 = integer_literal $Builtin.Int32, 0         // user: %16
   %16 = struct $Int32 (%15 : $Builtin.Int32)      // user: %17
   return %16 : $Int32                             // id: %17

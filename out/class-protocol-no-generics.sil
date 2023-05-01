@@ -365,8 +365,8 @@ sil hidden [signature_optimized_thunk] [always_inline] @main.organise(main.Confe
 bb0(%0 : $*any Conference):
   // function_ref specialized organise(_:)
   %1 = function_ref @function signature specialization <Arg[0] = Existential To Protocol Constrained Generic> of main.organise(main.Conference) -> () : $@convention(thin) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // user: %3
-  %2 = open_existential_addr immutable_access %0 : $*any Conference to $*@opened("A2A16D48-E72F-11ED-87E0-96B3AA0BE17C", any Conference) Self // users: %3, %3
-  %3 = apply %1<@opened("A2A16D48-E72F-11ED-87E0-96B3AA0BE17C", any Conference) Self>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %2; user: %4
+  %2 = open_existential_addr immutable_access %0 : $*any Conference to $*@opened("F32EF622-E838-11ED-8BDB-96B3AA0BE17C", any Conference) Self // users: %3, %3
+  %3 = apply %1<@opened("F32EF622-E838-11ED-8BDB-96B3AA0BE17C", any Conference) Self>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %2; user: %4
   return %3 : $()                                 // id: %4
 } // end sil function 'main.organise(main.Conference) -> ()'
 

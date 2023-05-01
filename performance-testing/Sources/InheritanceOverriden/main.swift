@@ -11,8 +11,7 @@ class House: Building {
 }
 
 class Bungalow: House {
-  @objc override final var name: String { UUID().uuidString }
-//  final override var name: String { UUID().uuidString }
+  override var name: String { UUID().uuidString }
 }
 
 let buildingTime = timeOfRun(Building()) { data in
