@@ -24,9 +24,9 @@ let protocolTime = timeOfRun {
   }
 }
 
-print("\(protocolTime.formatted)s")
-print("\(structTime.formatted)s")
-print("Protocol's extension function is \((structTime / protocolTime)) times faster than accessed by protocol interface")
+print("Struct calls took   \(structTime.formatted)s")
+print("Protocol calls took \(protocolTime.formatted)s")
+print("Protocol's extension function is \((structTime / protocolTime)) times faster than accessed by protocol interface\n")
 
 func timeOfRun(_ function: () -> ()) -> Double {
   let timeBefore = CACurrentMediaTime()
@@ -36,7 +36,7 @@ func timeOfRun(_ function: () -> ()) -> Double {
 
 extension Double {
   var formatted: String {
-    String(format: "%.20f", self)
+    String(format: "%.10f", self)
   }
 }
 

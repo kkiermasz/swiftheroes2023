@@ -30,7 +30,7 @@ print("Specialized function calls for class took    \(specializedClassTime.forma
 print("Specialized function call for classes is     \((unspecializedClassTime / specializedClassTime).formatted) times faster than unspecialized\n")
 print("Unspecialized function calls for struct took \(unspecializedStructTime.formatted)s")
 print("Specialized function calls for struct took   \(specializedStructTime.formatted)s")
-print("Specialized function call for structs        is \((unspecializedStructTime / specializedStructTime).formatted) times faster than unspecialized\n")
+print("Specialized function call for structs is     \((unspecializedStructTime / specializedStructTime).formatted) times faster than unspecialized\n")
 
 
 import Foundation

@@ -2,8 +2,7 @@ import Foundation
 import QuartzCore
 
 class Building {
-//  var name: String { UUID().uuidString }
-  @objc dynamic var name: String { UUID().uuidString }
+  var name: String { UUID().uuidString }
 }
 
 class House: Building {
