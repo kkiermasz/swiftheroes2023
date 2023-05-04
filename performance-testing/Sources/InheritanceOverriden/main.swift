@@ -1,6 +1,3 @@
-import Foundation
-import QuartzCore
-
 class Building {
   var name: String { UUID().uuidString }
 }
@@ -40,3 +37,6 @@ func timeOfRun<BuildingType: Building>(_ data: BuildingType, _ function: (_ data
   function(data)
   return CACurrentMediaTime() - timeBefore
 }
+
+import Foundation
+import QuartzCore
